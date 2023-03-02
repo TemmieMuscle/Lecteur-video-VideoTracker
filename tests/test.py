@@ -2,8 +2,8 @@
 
 ### IMPORTS ###
 from random import *
-import model.Point as pt
-import model.FileRepo as fr
+import model.Point as pt # PATH OUTDATED
+import model.FileRepo as fr # PATH OUTDATED 
 
 
 ### FUNCTIONS ###
