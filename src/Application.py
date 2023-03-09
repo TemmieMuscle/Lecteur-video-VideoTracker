@@ -1,10 +1,13 @@
+from models.Video import Video
+from views.view import View
+from controllers.Controller import Controller
 
 import tkinter as tk
 
 class Application(tk.Tk):
 
     def __init__(self):
-
+        
         super().__init__()
         self.title('Video Tracker')
         # create a video model
