@@ -1,0 +1,10 @@
+
+
+models/video : 
+    creer classe Vidéo vaec méthode : get frame, open file, play video ?
+
+view : 
+    create enu buttons and generalappearance of the software
+
+controler :
+    link allbuttons to their purpose
