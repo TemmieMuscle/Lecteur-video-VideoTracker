@@ -9,7 +9,7 @@ class View(tk.Frame):
         parent.title("Video Tracker")  
         self.parent=parent
         
-        
+
         """Définition des menus"""
         menuBarre = tk.Menu(self.parent)
 
@@ -35,9 +35,9 @@ class View(tk.Frame):
 
 
         """Définition du widget qui contiendra les images"""
-        cadreMilieu=tk.Canvas(self.parent)
-        cadreMilieu.create_text((100,50),text="Canvas qui contiendra l'image")
-        cadreMilieu.pack()
+        self.cadreMilieu=tk.Canvas(self.parent)
+        #self.cadreMilieu.create_text((100,50),text="Canvas qui contiendra l'image")
+        self.cadreMilieu.pack()
 
 
         """Définition des widget boutons et label liés aux vidéos, contenu dans un widget frame"""
