@@ -24,4 +24,9 @@ class Application(tk.Tk):
 
 if __name__ == '__main__':
     app = Application()
+    Video.Video(tk.Tk(), "Video Tracker")
+
+    # end of the main loop
     app.mainloop()
+
+    
