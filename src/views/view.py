@@ -10,5 +10,5 @@ class View(tk.Frame):
     
     def setController(self, controller):
         self.controller = controller
-s
+
     
