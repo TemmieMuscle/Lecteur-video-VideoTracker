@@ -4,21 +4,14 @@ from tkinter import *
 
 class Video:
 
-    def __init__(self, window, window_title):
+    def __init__(self, window, path):
 
         self.window = window
-        self.window.title(window_title)
-
         self.canvas = Canvas(window)
         self.canvas.pack()
-        self.delay = 15   # ms
-        self.open_file('test.mp4')
-        self.play_video()
-        self.window.mainloop()
 
-    # Open video file
-    def open_file(self, path): 
         self.pause = False
+        self.delay = 15 # ms
         self.cap = cv2.VideoCapture(path)
         self.width = self.cap.get(cv2.CAP_PROP_FRAME_WIDTH)
         self.height = self.cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
@@ -36,12 +29,12 @@ class Video:
             #print("end of the video !") # eventually make an error pop up ?
             pass
 
-    def play_video(self):
-        # Get a frame from the video source, and go to the next frame automatically
+    def play_video(self): 
+        # Get a frame from the video source, and go to the next frame automatically by recursion
         try :
             ret, frame = self.get_frame()
             if ret:
-                self.photo = PIL.ImageTk.PhotoImage(image = PIL.Image.fromarray(frame)) ## got to view
+                self.photo = PIL.ImageTk.PhotoImage(image = PIL.Image.fromarray(frame)) ## go to view
                 self.canvas.create_image(0, 0, image = self.photo, anchor = NW) ## go to view
             if not self.pause:
                 self.window.after(self.delay, self.play_video)   
@@ -54,5 +47,14 @@ class Video:
         if self.cap.isOpened():
             self.cap.release()
 
+
 if __name__ == "__main__" :
-    Video(Tk(), "Video Tracker")
+
+    window = Tk()
+    window.title("Video Tracker [VIDEO MODEL]")
+
+    vid = Video(window, 'test.mp4')
+    vid.play_video()
+
+    window.mainloop()
+    
