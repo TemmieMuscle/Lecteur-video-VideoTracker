@@ -16,9 +16,7 @@ class Application(tk.Tk):
 
         # create a video model
         video = Video(view)
-        # test commands : change path of video for it to work
-        video.load_video(r"C:\Users\leo\Documents\videotracker_b1\src\models\test.mp4") ### ne support qu'un path absolu pour une raison obscure
-        video.play_video()
+        #video.play_video()
 
         # create a controller
         controller = Controller(video, view)

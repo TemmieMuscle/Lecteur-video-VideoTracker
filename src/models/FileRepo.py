@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import tkinter as tk
+from tkinter import filedialog as fd
 
 class FileRepo : 
     def __init__(self) :
@@ -15,4 +17,15 @@ class FileRepo :
         file.write(csvData) # writing formatted data to new file
         file.close()
         
-    
+    def getFile() :
+        filetypes = (
+        ('MP4 files', '*.mp4'),
+        ('WAV files', '*.wav'),
+        ('MOV files', '*.mov'),
+        ('AVI files', '*.avi'),
+        ('FLV files', '*.flv'),
+        ('WEBM files', '*.webm'))
+
+        filename = fd.askopenfilename(title='Choose the video',filetypes=filetypes)
+
+        return filename

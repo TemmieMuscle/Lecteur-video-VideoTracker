@@ -1,23 +1,31 @@
 import cv2
 import PIL.Image, PIL.ImageTk
 import tkinter as tk
+from . import FileRepo as fr
 
 class Video():
 
     def __init__(self, view):
 
         self.canvas = view.cadreMilieu
-        self.pause = False
+        self.pause = True
         self.delay = 15 # delay between frames
 
-    # load video
-    def load_video(self, path) :
-        self.cap = cv2.VideoCapture(path)
+    # Load video with file chooser in filerepo
+    def load_video(self) :
+        self.pause = True
+        PATH = fr.FileRepo.getFile() # get path of file with filerepo
+
+        self.cap = cv2.VideoCapture(PATH)
         self.width = self.cap.get(cv2.CAP_PROP_FRAME_WIDTH)
-        self.height = self.cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
+        self.height = self.cap.get(cv2.CAP_PROP_FRAME_HEIGHT) ############ afficher la première frame de manière automatique apres avoir load la vidéo je te laisse faire
         self.canvas.config(width = self.width, height = self.height)
         #print(f"{self.width} : {self.height}") # DEBUG
-
+    
+    def play_and_load_video(self) :
+        self.load_video()
+        self.pause = False
+        self.play_video()
 
    # get only one frame    
     def get_frame(self):   
@@ -38,18 +46,17 @@ class Video():
             if not self.pause:
                 self.canvas.after(self.delay, self.play_video)   
         
-
-        # Release the video source when the object is destroyed
-    def __del__(self):
-        if self.cap.isOpened():
-            self.cap.release()
-
     def pause_video(self):
         if self.pause==False:
             self.pause=True
         else:
             self.pause=False
             self.play_video()
+
+        # Release the video source when the object is destroyed
+    def __del__(self):
+        if self.cap.isOpened():
+            self.cap.release()
 
 
 if __name__ == "__main__" :

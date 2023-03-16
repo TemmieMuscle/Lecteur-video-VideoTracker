@@ -13,12 +13,12 @@ class View(tk.Frame):
         """Définition des menus"""
         menuBarre = tk.Menu(self.parent)
 
-        fileMenu=tk.Menu(menuBarre, tearoff=0)
-        fileMenu.add_command(label="Charger Vidéo")
-        fileMenu.add_command(label="Lire Vidéo")
-        fileMenu.add_separator()
-        fileMenu.add_command(label="Exporter CSV")
-        menuBarre.add_cascade(label="File",menu=fileMenu)
+        self.fileMenu=tk.Menu(menuBarre, tearoff=0) # labels are indexed in fileMenu (to be used with entry config in controller)
+        self.fileMenu.add_command(label="Charger Vidéo") #0
+        self.fileMenu.add_command(label="Lire Vidéo")#1
+        self.fileMenu.add_separator()
+        self.fileMenu.add_command(label="Exporter CSV")#3
+        menuBarre.add_cascade(label="File",menu=self.fileMenu)
     
         viewMenu=tk.Menu(menuBarre, tearoff=0)
         viewMenu.add_command(label="Afficher Graphes")
@@ -36,7 +36,7 @@ class View(tk.Frame):
 
         """Définition du widget qui contiendra les images"""
         self.cadreMilieu=tk.Canvas(self.parent)
-        #self.cadreMilieu.create_text((100,50),text="Canvas qui contiendra l'image")
+        self.cadreMilieu.create_text((100,50),text="Chargez une vidéo pour commencer") #### bien positioner
         self.cadreMilieu.pack()
 
 
