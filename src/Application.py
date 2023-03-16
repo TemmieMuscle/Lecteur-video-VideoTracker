@@ -17,14 +17,14 @@ class Application(tk.Tk):
         # create a video model
         video = Video(view)
         # test commands : change path of video for it to work
-        video.load_video("/home/nathan/MEGA/Cours/S2/Développement logiciel/GIT/videotracker_b1/src/models/test.mp4") ### ne support qu'un path absolu pour une raison obscure
+        video.load_video(r"C:\Users\leo\Documents\videotracker_b1\src\models\test.mp4") ### ne support qu'un path absolu pour une raison obscure
         video.play_video()
 
         # create a controller
-        #controller = Controller(video, view)
+        controller = Controller(video, view)
 
         # set the controller to view
-        #view.setController(controller)
+        view.setController(controller)
         
 
 if __name__ == '__main__':

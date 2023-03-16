@@ -44,6 +44,13 @@ class Video():
         if self.cap.isOpened():
             self.cap.release()
 
+    def pause_video(self):
+        if self.pause==False:
+            self.pause=True
+        else:
+            self.pause=False
+            self.play_video()
+
 
 if __name__ == "__main__" :
 
