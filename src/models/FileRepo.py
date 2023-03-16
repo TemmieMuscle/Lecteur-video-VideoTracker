@@ -13,7 +13,10 @@ class FileRepo :
         return csvString
     
     def save(csvData) :
-        file = open("output.csv", "w")
+        file = fd.asksaveasfile(mode='w', defaultextension=".csv")
+        if file == None : # if canceled by user
+            return
+        
         file.write(csvData) # writing formatted data to new file
         file.close()
         
@@ -27,5 +30,7 @@ class FileRepo :
         ('WEBM files', '*.webm'))
 
         filename = fd.askopenfilename(title='Choose the video',filetypes=filetypes)
+        if filename == None : # if canceled by user
+            return
 
         return filename

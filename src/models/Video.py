@@ -21,6 +21,8 @@ class Video():
         self.height = self.cap.get(cv2.CAP_PROP_FRAME_HEIGHT) ############ afficher la première frame de manière automatique apres avoir load la vidéo je te laisse faire
         self.canvas.config(width = self.width, height = self.height)
         #print(f"{self.width} : {self.height}") # DEBUG
+
+        print("Successfully loaded video !")
     
     def play_and_load_video(self) :
         self.load_video()
@@ -55,9 +57,31 @@ class Video():
 
         # Release the video source when the object is destroyed
     def __del__(self):
-        if self.cap.isOpened():
-            self.cap.release()
+        try : 
+            if self.cap.isOpened():
+                self.cap.release()
+        except : # if no video is loaded
+            pass
 
+#########################################################################################
+    def save_data(self) : ######## TO BE DISCONTINUED mais on verra quand on fera les points etc.
+        import random as rd
+        from . import Point as pt
+
+        def randomPoints(n:int) -> list: # creates and returns a list of 10 random points for testing
+            l = []
+            for i in range(n) : # Creating n random points
+                tempPoint = pt.Point(rd.randint(0,100), rd.randint(0,100))
+                l.append(tempPoint)
+            return l
+        
+        pointList = randomPoints(10)
+        timeList = [i for i in range(10)]
+
+        data = fr.FileRepo.transformDataToCsv(pointList, timeList) # converting data to csv
+        fr.FileRepo.save(data)
+        print("Data saved !")
+#########################################################################################
 
 if __name__ == "__main__" :
 
