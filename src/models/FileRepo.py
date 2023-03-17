@@ -6,21 +6,41 @@ class FileRepo :
     def __init__(self) :
         pass
         
-    def transformDataToCsv(points, time) :
+    def transformDataToCsv(self,points, time) :
         csvString = "posX;posY;timestamp\n" # adding names to variables to follow / needed for csv
         for i in range(len(time)) : # adding line for each point / like posX;posY;timestamp
             csvString += f"{points[i].getX()};{points[i].getY()};{time[i]}\n" 
         return csvString
     
-    def save(csvData) :
+    def save(self,csvData) :
         file = fd.asksaveasfile(mode='w', defaultextension=".csv")
         if file == None : # if canceled by user
             return
         
         file.write(csvData) # writing formatted data to new file
         file.close()
+
+#########################################################################################
+    def save_data(self) : ######## TO BE DISCONTINUED mais on verra quand on fera les points etc.
+        import random as rd
+        from . import Point as pt
+
+        def randomPoints(n:int) -> list: # creates and returns a list of 10 random points for testing
+            l = []
+            for i in range(n) : # Creating n random points
+                tempPoint = pt.Point(rd.randint(0,100), rd.randint(0,100))
+                l.append(tempPoint)
+            return l
         
-    def getFile() :
+        pointList = randomPoints(10)
+        timeList = [i for i in range(10)]
+
+        data = self.transformDataToCsv(pointList, timeList) # converting data to csv
+        self.save(data)
+        print("Data saved !")
+#########################################################################################
+        
+    def getFile(self) :
         filetypes = (
         ('MP4 files', '*.mp4'),
         ('WAV files', '*.wav'),

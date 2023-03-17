@@ -1,6 +1,7 @@
 from models.Video import Video
 from views.view import View
 from controllers.Controller import Controller
+from models.FileRepo import FileRepo
 
 import tkinter as tk
 
@@ -18,8 +19,11 @@ class Application(tk.Tk):
         video = Video(view)
         #video.play_video()
 
+        # create a FileRepo model
+        fileRepo=FileRepo()
+
         # create a controller
-        controller = Controller(video, view)
+        controller = Controller(video, view,fileRepo)
 
         # set the controller to view
         view.setController(controller)

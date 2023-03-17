@@ -1,8 +1,6 @@
 import cv2
 import PIL.Image, PIL.ImageTk
 import tkinter as tk
-from . import FileRepo as fr
-
 class Video():
 
     def __init__(self, view):
@@ -11,12 +9,10 @@ class Video():
         self.pause = True
         self.delay = 15 # delay between frames
 
-    # Load video with file chooser in filerepo
-    def load_video(self) :
-        self.pause = True
-        PATH = fr.FileRepo.getFile() # get path of file with filerepo
-
+    # Load video with a file given
+    def load_video(self,PATH) :
         self.cap = cv2.VideoCapture(PATH)
+        self.pause = True
         self.width = self.cap.get(cv2.CAP_PROP_FRAME_WIDTH)
         self.height = self.cap.get(cv2.CAP_PROP_FRAME_HEIGHT) ############ afficher la première frame de manière automatique apres avoir load la vidéo je te laisse faire
         self.canvas.config(width = self.width, height = self.height)
@@ -24,8 +20,8 @@ class Video():
 
         print("Successfully loaded video !")
     
-    def play_and_load_video(self) :
-        self.load_video()
+    def play_and_load_video(self,PATH) :
+        self.load_video(PATH)
         self.pause = False
         self.play_video()
 
@@ -48,7 +44,7 @@ class Video():
             if not self.pause:
                 self.canvas.after(self.delay, self.play_video)   
         
-    def pause_video(self):
+    def pause_video(self): # set video in pause if it was playing, or play it if it was pause
         if self.pause==False:
             self.pause=True
         else:
@@ -62,26 +58,6 @@ class Video():
                 self.cap.release()
         except : # if no video is loaded
             pass
-
-#########################################################################################
-    def save_data(self) : ######## TO BE DISCONTINUED mais on verra quand on fera les points etc.
-        import random as rd
-        from . import Point as pt
-
-        def randomPoints(n:int) -> list: # creates and returns a list of 10 random points for testing
-            l = []
-            for i in range(n) : # Creating n random points
-                tempPoint = pt.Point(rd.randint(0,100), rd.randint(0,100))
-                l.append(tempPoint)
-            return l
-        
-        pointList = randomPoints(10)
-        timeList = [i for i in range(10)]
-
-        data = fr.FileRepo.transformDataToCsv(pointList, timeList) # converting data to csv
-        fr.FileRepo.save(data)
-        print("Data saved !")
-#########################################################################################
 
 if __name__ == "__main__" :
 
