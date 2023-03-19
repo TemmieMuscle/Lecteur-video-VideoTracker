@@ -43,24 +43,24 @@ class View(tk.Frame):
         """Définition des widget boutons et label liés aux vidéos, contenu dans un widget frame"""
         cadreBas=tk.Frame(self.parent)
 
-        self.temperature_lbl = tk.Label(cadreBas,font = ('Arial', 25))
-        self.temperature_lbl.pack(padx=50,pady=20,side="left")
-        self.temperature_lbl.config(text = "Frame actuelle sur frame max")
+        self.frameActuelle_lbl = tk.Label(cadreBas,font = ('Arial', 15))
+        self.frameActuelle_lbl.pack(padx=50,pady=20,side="left")
+        self.frameActuelle_lbl.config(text = "Frame actuelle sur frame max")
 
-        self.play_btn = tk.Button(cadreBas, text ='⏵',font = ('Arial', 25))
+        self.play_btn = tk.Button(cadreBas, text ='⏵',font = ('Arial', 15))
         self.play_btn.pack(side='left',padx=40, pady=20)
 
-        self.skipBackward_btn = tk.Button(cadreBas, text ='⏮',font = ('Arial', 25))
+        self.skipBackward_btn = tk.Button(cadreBas, text ='⏮',font = ('Arial', 15))
         self.skipBackward_btn.pack(side='left',padx=5, pady=20)
-        self.skipForward_btn = tk.Button(cadreBas, text ='⏭',font = ('Arial', 25))
+        self.skipForward_btn = tk.Button(cadreBas, text ='⏭',font = ('Arial', 15))
         self.skipForward_btn.pack(side='left',padx=5, pady=20)
 
-        self.espace = tk.Label(cadreBas,font = ('Arial', 25))
+        self.espace = tk.Label(cadreBas,font = ('Arial', 15))
         self.espace.pack(padx=20,pady=5,side="left")
 
-        self.back_btn = tk.Button(cadreBas, text ='⏪',font = ('Arial', 25))
+        self.back_btn = tk.Button(cadreBas, text ='⏪',font = ('Arial', 15))
         self.back_btn.pack(side='left',padx=5, pady=20)
-        self.next_btn = tk.Button(cadreBas, text ='⏩',font = ('Arial', 25))
+        self.next_btn = tk.Button(cadreBas, text ='⏩',font = ('Arial', 15))
         self.next_btn.pack(side='left',padx=5, pady=20)       
         cadreBas.pack(side='bottom',fill="x")
 

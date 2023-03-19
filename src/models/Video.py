@@ -6,8 +6,11 @@ class Video():
     def __init__(self, view):
 
         self.canvas = view.cadreMilieu
+        self.compteurFrame = view.frameActuelle_lbl
         self.pause = True
         self.delay = 15 # delay between frames
+        self.tabVideo = []
+        self.index=0
 
     # Load video with a file given
     def load_video(self,PATH) :
@@ -16,8 +19,9 @@ class Video():
         self.width = self.cap.get(cv2.CAP_PROP_FRAME_WIDTH)
         self.height = self.cap.get(cv2.CAP_PROP_FRAME_HEIGHT) ############ afficher la première frame de manière automatique apres avoir load la vidéo je te laisse faire
         self.canvas.config(width = self.width, height = self.height)
+        self.tab_video()
+        self.indexAndIndexMax()
         #print(f"{self.width} : {self.height}") # DEBUG
-
         print("Successfully loaded video !")
     
     def play_and_load_video(self,PATH) :
@@ -34,15 +38,24 @@ class Video():
         except:
             #print("end of the video !") # eventually make an error pop up ?
             return (ret, None)
+        
+    # Append self.tabVideo with all frame of the video
+    def tab_video(self): 
+            ret, frame = self.get_frame() 
+            if ret:
+                photo = PIL.ImageTk.PhotoImage(image = PIL.Image.fromarray(frame)) ## go to view
+                self.tabVideo.append(photo)
+                self.tab_video()
+
 
     def play_video(self): 
         # Get a frame from the video source, and go to the next frame automatically by recursion
-            ret, frame = self.get_frame()
-            if ret:
-                self.photo = PIL.ImageTk.PhotoImage(image = PIL.Image.fromarray(frame)) ## go to view
-                self.canvas.create_image(0, 0, image = self.photo, anchor = tk.NW) ## go to view
+        if self.index<len(self.tabVideo):
+            self.canvas.create_image(0, 0, image = self.tabVideo[self.index], anchor = tk.NW) ## go to view
+            self.indexAndIndexMax()
+            self.index=self.index+1
             if not self.pause:
-                self.canvas.after(self.delay, self.play_video)   
+                self.canvas.after(self.delay, self.play_video) 
         
     def pause_video(self): # set video in pause if it was playing, or play it if it was pause
         if self.pause==False:
@@ -50,6 +63,34 @@ class Video():
         else:
             self.pause=False
             self.play_video()
+
+    def skipBackward(self):
+        if self.tabVideo!=[]:
+            self.index=0
+            self.canvas.create_image(0, 0, image = self.tabVideo[self.index], anchor = tk.NW)
+            self.indexAndIndexMax()
+
+    def skipForward(self):
+        if self.tabVideo!=[]:
+            self.index=len(self.tabVideo)-1
+            self.canvas.create_image(0, 0, image = self.tabVideo[self.index], anchor = tk.NW)
+            self.indexAndIndexMax()
+
+    def back(self):
+        if self.index>0 and self.tabVideo!=[]:
+            self.index=self.index-1
+            self.canvas.create_image(0, 0, image = self.tabVideo[self.index], anchor = tk.NW)
+            self.indexAndIndexMax()
+
+    def next(self):
+        if self.index<len(self.tabVideo)-1 and self.tabVideo!=[]:
+            self.index=self.index+1
+            self.canvas.create_image(0, 0, image = self.tabVideo[self.index], anchor = tk.NW)
+            self.indexAndIndexMax()
+
+    def indexAndIndexMax(self):
+        frameActualOnFrameMax=str(self.index)+"/"+str(len(self.tabVideo)-1)
+        self.compteurFrame.config(text=frameActualOnFrameMax)
 
         # Release the video source when the object is destroyed
     def __del__(self):
