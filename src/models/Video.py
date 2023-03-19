@@ -11,6 +11,7 @@ class Video():
         self.delay = 15 # delay between frames
         self.tabVideo = []
         self.index=0
+        self.idImage=-1
 
     # Load video with a file given
     def load_video(self,PATH) :
@@ -51,7 +52,7 @@ class Video():
     def play_video(self): 
         # Get a frame from the video source, and go to the next frame automatically by recursion
         if self.index<len(self.tabVideo):
-            self.canvas.create_image(0, 0, image = self.tabVideo[self.index], anchor = tk.NW) ## go to view
+            self.putImageCanvas() ## go to view
             self.indexAndIndexMax()
             self.index=self.index+1
             if not self.pause:
@@ -92,7 +93,12 @@ class Video():
         frameActualOnFrameMax=str(self.index)+"/"+str(len(self.tabVideo)-1)
         self.compteurFrame.config(text=frameActualOnFrameMax)
 
-        # Release the video source when the object is destroyed
+    def putImageCanvas(self):
+        if self.idImage!=-1:
+            self.canvas.delete(self.idImage)
+        self.idImage=self.canvas.create_image(0, 0, image = self.tabVideo[self.index], anchor = tk.NW)
+
+    # Release the video source when the object is destroyed
     def __del__(self):
         try : 
             if self.cap.isOpened():
