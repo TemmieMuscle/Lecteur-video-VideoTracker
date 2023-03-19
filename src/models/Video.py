@@ -19,8 +19,12 @@ class Video():
         self.width = self.cap.get(cv2.CAP_PROP_FRAME_WIDTH)
         self.height = self.cap.get(cv2.CAP_PROP_FRAME_HEIGHT) ############ afficher la première frame de manière automatique apres avoir load la vidéo je te laisse faire
         self.canvas.config(width = self.width, height = self.height)
-        self.tab_video()
-        self.indexAndIndexMax()
+
+        self.tabVideo.clear() # clear tabVideo when loading a new video
+        self.tab_video() # tab all frames
+        self.indexAndIndexMax() # setup indexation
+        self.skipBackward() # go back to frame 1
+
         #print(f"{self.width} : {self.height}") # DEBUG
         print("Successfully loaded video !")
     
