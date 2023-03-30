@@ -12,10 +12,13 @@ class FileRepo :
             csvString += f"{points[i].getX()};{points[i].getY()};{time[i]}\n" 
         return csvString
     
-    def save(self,csvData) :
-        file = fd.asksaveasfile(mode='w', defaultextension=".csv")
-        if file == None : # if canceled by user
-            return
+    def save(self,csvData, debug=False) :
+        if debug : # this line only activates when triggered by the test script
+            file = open("debug.csv", "x") # it avoid using tkinter during testing phases
+        else :
+            file = fd.asksaveasfile(mode='w', defaultextension=".csv")
+            if file == None : # if canceled by user
+                return
         
         file.write(csvData) # writing formatted data to new file
         file.close()
