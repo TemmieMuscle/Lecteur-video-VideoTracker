@@ -6,16 +6,16 @@ class FileRepo :
     def __init__(self) :
         pass
         
-    def transformDataToCsv(self,points, time) :
+    def transformDataToCsv(points, time) :
         csvString = "posX;posY;timestamp\n" # adding names to variables to follow / needed for csv
         for i in range(len(time)) : # adding line for each point / like posX;posY;timestamp
             csvString += f"{points[i].getX()};{points[i].getY()};{time[i]}\n" 
         return csvString
     
-    def save(self,csvData, debug=False) :
-        if debug : # this line only activates when triggered by the test script
-            file = open("debug.csv", "x") # it avoid using tkinter during testing phases
-        else :
+    def save(csvData, debug=False) :
+        if debug == True : # this line only activates when triggered by the test script
+            file = open("debug.csv", "w") # it avoid using tkinter during testing phases
+        if debug == False:
             file = fd.asksaveasfile(mode='w', defaultextension=".csv")
             if file == None : # if canceled by user
                 return
