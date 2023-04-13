@@ -22,26 +22,6 @@ class FileRepo :
         
         file.write(csvData) # writing formatted data to new file
         file.close()
-
-#########################################################################################
-    def save_data(self) : ######## TO BE DISCONTINUED mais on verra quand on fera les points etc.
-        import random as rd
-        from . import Point as pt
-
-        def randomPoints(n:int) -> list: # creates and returns a list of 10 random points for testing
-            l = []
-            for i in range(n) : # Creating n random points
-                tempPoint = pt.Point(rd.randint(0,100), rd.randint(0,100))
-                l.append(tempPoint)
-            return l
-        
-        pointList = randomPoints(10)
-        timeList = [i for i in range(10)]
-
-        data = self.transformDataToCsv(pointList, timeList) # converting data to csv
-        self.save(data)
-        print("Data saved !")
-#########################################################################################
         
     def getFile(self) :
         filetypes = (

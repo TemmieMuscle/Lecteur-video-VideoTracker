@@ -26,7 +26,7 @@ class Test_FileRepo(unittest.TestCase):
         FileRepo.save(self.csvData, True) # calling save method in debug mode -> creating a file called debug.csv
         # An error pops out if the file is not createdgit c
 
-    def test_is_file_content_correct(self) :
+    def test_save_is_file_content_correct(self) :
         FileRepo.save(self.csvData, True) # creating file to test
 
         """Check if file contains the same data than what was given"""
