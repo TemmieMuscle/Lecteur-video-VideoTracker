@@ -1,6 +1,6 @@
 import unittest
 import sys
-sys.path.append("./models/")
+sys.path.append(".")
 
 from Point import Point
 
