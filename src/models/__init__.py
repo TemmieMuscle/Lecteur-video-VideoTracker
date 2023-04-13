@@ -1,2 +1,2 @@
-from .FileRepo import FileRepo
-from .Point import Point
+from FileRepo import FileRepo
+from Point import Point
