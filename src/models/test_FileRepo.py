@@ -3,6 +3,7 @@ import sys
 sys.path.append("/")
 
 from FileRepo import FileRepo
+from Point import Point
 
 import random
 
@@ -13,6 +14,9 @@ class Test_FileRepo(unittest.TestCase):
         for i in range(10) :
             randomValue = random.randint(0,100)
             self.csvData += f"{randomValue}; {randomValue}; {i}\n"
+
+        self.point =[Point(1,0),Point(9,0),Point(1,4),Point(6,0)]
+        self.temps=[0,1,2,3]
 
     def tearDown(self):
         pass
@@ -35,12 +39,11 @@ class Test_FileRepo(unittest.TestCase):
         
         # check if each line of the file is equal to each line of csvData
             #self.assertTrue(line)
-        
-        
 
     def test_transformDataToCsv(self) :
-        pass         ## léonard
-
+        expectedResult = "posX;posY;timestamp\n1;0;0\n9;0;1\n1;4;2\n6;0;3\n" # define in this variable the expected result
+        obtainResult = FileRepo.transformDataToCsv(self.point,self.temps) #define in this variable the return of the tested function
+        self.assertTrue(expectedResult == obtainResult) # Assert that the expected result is the same that the result of the tested function
     
 if __name__ == '__main__':
     unittest.main(verbosity=2)
@@ -48,5 +51,6 @@ if __name__ == '__main__':
     tfr = Test_FileRepo()
     tfr.setUp()
     tfr.test_save()
+    tfr.test_transformDataToCsv()
     
     
