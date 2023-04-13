@@ -17,7 +17,19 @@ buid-job1:
 test-job1:
   stage: test
   script :
+    - python3 -m unittest -v src/models/test_FileRepo.py
+
+test-job2:
+  stage: test
+  script :
     - python3 -m unittest -v src/models/test_Point.py
+
+coverage-job1:
+  stage: coverage
+  script :
+    - coverage run -m unittest
+    - coverage run --source=Parser -m pytest src/models/test_FileRepo.py
+    - coverage report -m
 
 coverage-job2:
   stage: coverage
@@ -25,3 +37,5 @@ coverage-job2:
     - coverage run -m unittest
     - coverage run --source=Parser -m pytest src/models/test_Point.py
     - coverage report -m
+
+
