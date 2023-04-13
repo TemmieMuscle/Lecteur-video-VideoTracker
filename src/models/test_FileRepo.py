@@ -1,6 +1,6 @@
 import unittest
 import sys
-sys.path.append("../")
+sys.path.append("/")
 
 from FileRepo import FileRepo
 
