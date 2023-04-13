@@ -1,6 +1,4 @@
 import unittest
-
-
 from Point import Point
 
 import random
