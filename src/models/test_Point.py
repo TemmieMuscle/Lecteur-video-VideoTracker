@@ -1,4 +1,7 @@
 import unittest
+import sys
+sys.path.append("./models/")
+
 from Point import Point
 
 import random
