@@ -2,7 +2,7 @@ import unittest
 import sys
 import os
 
-path = os.getcwd()
+path = os.getcwd()  
 sys.path.insert(0, path)
 
 from src.models.Point import Point
