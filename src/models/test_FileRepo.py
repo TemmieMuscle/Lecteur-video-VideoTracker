@@ -3,7 +3,8 @@ import sys
 import os
 
 abspath = os.path.abspath("")
-sys.path.append("abspath")
+sys.path.insert("abspath")
+
 from FileRepo import FileRepo
 from Point import Point
 import random
