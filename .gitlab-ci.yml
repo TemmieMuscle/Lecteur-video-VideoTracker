@@ -28,14 +28,14 @@ coverage-job1:
   stage: coverage
   script :
     - coverage run -m unittest
-    - coverage run -m pytest tests/test_FileRepo.py
+    - coverage run --source=tests -m pytest tests/test_FileRepo.py
     - coverage report -m
 
 coverage-job2:
   stage: coverage
   script :
     - coverage run -m unittest
-    - coverage run -m pytest tests/test_Point.py
+    - coverage run --source=tests -m pytest tests/test_Point.py
     - coverage report -m
 
 
