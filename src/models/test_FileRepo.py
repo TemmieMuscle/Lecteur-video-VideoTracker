@@ -1,10 +1,9 @@
 import unittest
 import sys
-sys.path.append("/videotracker_b1/src/models/")
+sys.path.append("../")
 
 from FileRepo import FileRepo
 from Point import Point
-
 import random
 
 class Test_FileRepo(unittest.TestCase):
