@@ -1,9 +1,11 @@
 import unittest
 import sys
-sys.path.append("../")
+import os
 
-from Point import Point
+path = os.getcwd()
+sys.path.insert(0, path)
 
+from src.models.Point import Point
 import random
 
 class Test_Point(unittest.TestCase):
