@@ -3,7 +3,7 @@ import sys
 import os
 
 abspath = os.path.abspath("")
-sys.path.insert("abspath")
+sys.path.insert(0, "abspath")
 
 from FileRepo import FileRepo
 from Point import Point
