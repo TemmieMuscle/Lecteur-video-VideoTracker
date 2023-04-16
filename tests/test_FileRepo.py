@@ -2,11 +2,11 @@ import unittest
 import sys
 import os
 
-abspath = os.path.abspath("")
-sys.path.insert(0, "abspath")
+path = os.getcwd()
+sys.path.insert(0, path)
 
-from FileRepo import FileRepo
-from Point import Point
+from src.models.FileRepo import FileRepo
+from src.models.Point import Point
 import random
 
 class Test_FileRepo(unittest.TestCase):
