@@ -44,7 +44,7 @@ class View(tk.Frame):
         cadreBas=tk.Frame(self.parent)
 
         self.frameActuelle_lbl = tk.Label(cadreBas,font = ('Arial', 15))
-        self.frameActuelle_lbl.pack(padx=50,pady=20,side="left")
+        self.frameActuelle_lbl.pack(padx=15,pady=25,side="left")
         self.frameActuelle_lbl.config(text = "Frame actuelle sur frame max")
 
         self.play_btn = tk.Button(cadreBas, text ='⏵',font = ('Arial', 15))
