@@ -20,9 +20,11 @@ class Test_Point(unittest.TestCase):
         pass
 
     def test_getX(self):
+        """Test if X data is correct"""
         self.assertTrue(self.randomX == self.unPoint.getX())
 
     def test_getY(self):
+        """Test if X data is correct"""
         self.assertTrue(self.randomY == self.unPoint.getY())
 
 if __name__ == '__main__':

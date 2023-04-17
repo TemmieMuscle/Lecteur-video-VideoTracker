@@ -29,9 +29,9 @@ class Test_FileRepo(unittest.TestCase):
         # An error pops out if the file is not createdgit c
 
     def test_save_is_file_content_correct(self) :
+        """Check if file contains the same data than what was given"""
         FileRepo.save(self.csvData, True) # creating file to test
 
-        """Check if file contains the same data than what was given"""
         file = open("debug.csv", "r") # open file 
         lines = self.csvData.split('\n')# get list of original data
         fileLines = [line.replace("\n", "") for line in file]  # get lines of file data
@@ -43,6 +43,7 @@ class Test_FileRepo(unittest.TestCase):
             #self.assertTrue(line)
 
     def test_transformDataToCsv(self) :
+        """Check if data is in correct csv format"""
         expectedResult = "posX;posY;timestamp\n1;0;0\n9;0;1\n1;4;2\n6;0;3\n" # define in this variable the expected result
         obtainResult = FileRepo.transformDataToCsv(self.point,self.temps) #define in this variable the return of the tested function
         self.assertTrue(expectedResult == obtainResult) # Assert that the expected result is the same that the result of the tested function
@@ -52,7 +53,6 @@ if __name__ == '__main__':
 
     tfr = Test_FileRepo()
     tfr.setUp()
-    tfr.test_save()
     tfr.test_transformDataToCsv()
     
     
