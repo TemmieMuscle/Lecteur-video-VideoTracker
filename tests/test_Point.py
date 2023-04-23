@@ -2,14 +2,8 @@ import unittest
 import sys
 import os
 
-<<<<<<< HEAD:src/models/test_Point.py
-print(sys.path)
-
-from Point import Point
-=======
 path = os.getcwd()  
 sys.path.insert(0, path)
->>>>>>> 86dc013c2fd1c03ce760923fa9f6fc9cc2c023db:tests/test_Point.py
 
 from src.models.Point import Point
 import random
