@@ -19,18 +19,19 @@ class Test_FileRepo(unittest.TestCase):
 
         self.point =[Point(1,0),Point(9,0),Point(1,4),Point(6,0)]
         self.temps=[0,1,2,3]
+        self.objet=Filerepo
 
     def tearDown(self):
         pass
 
     def test_save_is_file_created(self) :
         """Check if a file is created correctly"""
-        FileRepo.save(self.csvData, True) # calling save method in debug mode -> creating a file called debug.csv
+        self.objet.save(self.csvData, True) # calling save method in debug mode -> creating a file called debug.csv
         # An error pops out if the file is not createdgit c
 
     def test_save_is_file_content_correct(self) :
         """Check if file contains the same data than what was given"""
-        FileRepo.save(self.csvData, True) # creating file to test
+        self.objet.save(self.csvData, True) # creating file to test
 
         file = open("debug.csv", "r") # open file 
         lines = self.csvData.split('\n')# get list of original data
@@ -45,7 +46,7 @@ class Test_FileRepo(unittest.TestCase):
     def test_transformDataToCsv(self) :
         """Check if data is in correct csv format"""
         expectedResult = "posX;posY;timestamp\n1;0;0\n9;0;1\n1;4;2\n6;0;3\n" # define in this variable the expected result
-        obtainResult = FileRepo.transformDataToCsv(self.point,self.temps) #define in this variable the return of the tested function
+        obtainResult = self.objet.transformDataToCsv(self.point,self.temps) #define in this variable the return of the tested function
         self.assertTrue(expectedResult == obtainResult) # Assert that the expected result is the same that the result of the tested function
     
 if __name__ == '__main__':
