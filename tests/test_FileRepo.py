@@ -19,7 +19,7 @@ class Test_FileRepo(unittest.TestCase):
 
         self.point =[Point(1,0),Point(9,0),Point(1,4),Point(6,0)]
         self.temps=[0,1,2,3]
-        self.objet=Filerepo
+        self.objet=FileRepo
 
     def tearDown(self):
         pass
