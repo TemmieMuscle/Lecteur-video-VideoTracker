@@ -6,13 +6,13 @@ class FileRepo :
     def __init__(self) :
         pass
         
-    def transformDataToCsv(points, time) :
+    def transformDataToCsv(self,points, time) :
         csvString = "posX;posY;timestamp\n" # adding names to variables to follow / needed for csv
         for i in range(len(time)) : # adding line for each point / like posX;posY;timestamp
             csvString += f"{points[i].getX()};{points[i].getY()};{time[i]}\n" 
         return csvString
     
-    def save(csvData, debug) : # this method has to have a debug argument or it messes the tests
+    def save(self,csvData, debug) : # this method has to have a debug argument or it messes the tests
         print(f"Debug = {debug}")
         if debug == True : # this line only activates when triggered by the test script
             file = open("debug.csv", "w") # it avoid using tkinter during testing phases
@@ -39,24 +39,24 @@ class FileRepo :
 
         return filename
     
-#########################################################################################
-def save_data() : ######## TO BE DISCONTINUED mais on verra quand on fera les points etc.
-    import random as rd
-    from . import Point
+    #########################################################################################
+    def save_data(self) : ######## TO BE DISCONTINUED mais on verra quand on fera les points etc.
+        import random as rd
+        from . import Point
 
-    fr = FileRepo()
+        fr = FileRepo()
 
-    def randomPoints(n:int) -> list: # creates and returns a list of 10 random points for testing
-        l = []
-        for i in range(n) : # Creating n random points
-            tempPoint = Point(rd.randint(0,100), rd.randint(0,100))
-            l.append(tempPoint)
-        return l
-    
-    pointList = randomPoints(10)
-    timeList = [i for i in range(10)]
+        def randomPoints(n:int) -> list: # creates and returns a list of 10 random points for testing
+            l = []
+            for i in range(n) : # Creating n random points
+                tempPoint = Point(rd.randint(0,100), rd.randint(0,100))
+                l.append(tempPoint)
+            return l
+        
+        pointList = randomPoints(10)
+        timeList = [i for i in range(10)]
 
-    data = fr.transformDataToCsv(pointList, timeList) # converting data to csv
-    fr.save(data, False)
-    print("Data saved !")
-#########################################################################################
+        data = fr.transformDataToCsv(pointList, timeList) # converting data to csv
+        fr.save(data, False)
+        print("Data saved !")
+    #########################################################################################
