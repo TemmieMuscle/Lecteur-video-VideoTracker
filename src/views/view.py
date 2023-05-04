@@ -8,29 +8,34 @@ class View(tk.Frame):
         super().__init__(parent)
         parent.title("Video Tracker")  
         self.parent=parent
-        
+
+        leStyle = ttk.Style(parent)
+        leStyle.theme_use("clam")
+        leStyle.configure("TButton",font=('',14))
+        leStyle.configure("TLabel",font=('Tekton Pro',14))
 
         """Définition des menus"""
         menuBarre = tk.Menu(self.parent)
+        laFonte=("Tekton Pro",11)
 
         self.fileMenu=tk.Menu(menuBarre, tearoff=0) # labels are indexed in fileMenu (to be used with entry config in controller)
-        self.fileMenu.add_command(label="Charger Vidéo") #0
-        self.fileMenu.add_command(label="Lire Vidéo")#1
+        self.fileMenu.add_command(label="Charger Vidéo",font=laFonte) #0
+        self.fileMenu.add_command(label="Lire Vidéo",font=laFonte)#1
         self.fileMenu.add_separator()
-        self.fileMenu.add_command(label="Exporter CSV")#3
-        self.fileMenu.add_command(label="Quitter")#4
-        menuBarre.add_cascade(label="File",menu=self.fileMenu)
+        self.fileMenu.add_command(label="Exporter CSV",font=laFonte)#3
+        self.fileMenu.add_command(label="Quitter",font=laFonte)#4
+        menuBarre.add_cascade(label="File",menu=self.fileMenu,font=laFonte)
     
         self.viewMenu=tk.Menu(menuBarre, tearoff=0)
-        self.viewMenu.add_command(label="Afficher Graphes")
-        menuBarre.add_cascade(label="View",menu=self.viewMenu)
+        self.viewMenu.add_command(label="Afficher Graphes",font=laFonte)
+        menuBarre.add_cascade(label="View",menu=self.viewMenu,font=laFonte)
 
         editMenu=tk.Menu(menuBarre, tearoff=0)
-        editMenu.add_command(label="Tableau Valeurs")
+        editMenu.add_command(label="Tableau Valeurs",font=laFonte)
         editMenu.add_separator()
-        editMenu.add_command(label="Définir Echelle X")
-        editMenu.add_command(label="Définir Echelle Y")
-        menuBarre.add_cascade(label="Edit",menu=editMenu)
+        editMenu.add_command(label="Définir Echelle X",font=laFonte)
+        editMenu.add_command(label="Définir Echelle Y",font=laFonte)
+        menuBarre.add_cascade(label="Edit",menu=editMenu,font=laFonte)
 
         self.parent.config(menu=menuBarre)
 
@@ -42,26 +47,26 @@ class View(tk.Frame):
 
 
         """Définition des widget boutons et label liés aux vidéos, contenu dans un widget frame"""
-        cadreBas=tk.Frame(self.parent)
+        cadreBas=ttk.Frame(self.parent,width=30)
 
-        self.frameActuelle_lbl = tk.Label(cadreBas,font = ('Arial', 15))
+        self.frameActuelle_lbl = ttk.Label(cadreBas,width=40)
         self.frameActuelle_lbl.pack(padx=15,pady=25,side="left")
-        self.frameActuelle_lbl.config(text = "Frame actuelle sur frame max")
+        self.frameActuelle_lbl.config(text = "")
 
-        self.play_btn = tk.Button(cadreBas, text ='⏵',font = ('Arial', 15))
+        self.play_btn = ttk.Button(cadreBas, text ='⏵')
         self.play_btn.pack(side='left',padx=40, pady=20)
 
-        self.skipBackward_btn = tk.Button(cadreBas, text ='⏮',font = ('Arial', 15))
+        self.skipBackward_btn = ttk.Button(cadreBas, text ='⏮')
         self.skipBackward_btn.pack(side='left',padx=5, pady=20)
-        self.skipForward_btn = tk.Button(cadreBas, text ='⏭',font = ('Arial', 15))
+        self.skipForward_btn = ttk.Button(cadreBas, text ='⏭')
         self.skipForward_btn.pack(side='left',padx=5, pady=20)
 
-        self.espace = tk.Label(cadreBas,font = ('Arial', 15))
+        self.espace = ttk.Label(cadreBas)
         self.espace.pack(padx=20,pady=5,side="left")
 
-        self.back_btn = tk.Button(cadreBas, text ='⏪',font = ('Arial', 15))
+        self.back_btn = ttk.Button(cadreBas, text ='⏪')
         self.back_btn.pack(side='left',padx=5, pady=20)
-        self.next_btn = tk.Button(cadreBas, text ='⏩',font = ('Arial', 15))
+        self.next_btn = ttk.Button(cadreBas, text ='⏩')
         self.next_btn.pack(side='left',padx=5, pady=20)       
         cadreBas.pack(side='bottom',fill="x")
 
