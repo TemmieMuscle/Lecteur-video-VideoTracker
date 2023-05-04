@@ -12,7 +12,7 @@ class FileRepo :
             csvString += f"{points[i].getX()};{points[i].getY()};{time[i]}\n" 
         return csvString
     
-    def save(self,csvData, debug) : # this method has to have a debug argument or it messes the tests
+    def save(self,csvData, debug) : # this method has to have a debug argument or it messes up the tests
         #print(f"Debug = {debug}")
         if debug == True : # this line only activates when triggered by the test script
             file = open("debug.csv", "w") # it avoid using tkinter during testing phases
