@@ -12,10 +12,10 @@ class Controller:
         # Menu configuration
         self.view.fileMenu.entryconfig(0, command=self.loadVideo) 
         self.view.fileMenu.entryconfig(1, command=self.playAndLoadVideo) 
-        self.view.fileMenu.entryconfig(3, command=self.FileRepo.save_data) ######## TO BE DISCONTINUED mais on verra quand on fera les points        
+        self.view.fileMenu.entryconfig(3, command=self.saveData) ######## TO BE DISCONTINUED mais on verra quand on fera les points        
         self.view.fileMenu.entryconfig(4, command=self.quit)
 
-        self.view.viewMenu.entryconfig(0, command=self.PointHandler.printGraphe) 
+        self.view.viewMenu.entryconfig(0, command=self.printGraphe) 
 
         # Video action buttons
         self.view.play_btn.config(command=self.video.pause_video)
@@ -33,10 +33,16 @@ class Controller:
 
     # fonction utilisé lors d'un click sur une frame de la vidéo => gére l'ajout des coordonnées du click et le numéro de la frame dans PointHandler
     def addPointInPointHandler(self,event):
-        index=self.video.getFrame() # récupère l'index de l'image dont les positions ont été récupéré
-        tabOfEvent=[index,event.x,self.video.height - event.y] # créer un tab de la forme [index,posX,posY] //  inverting y so (0,0) is in bottom left corner
+        frame_index=self.video.frame_index # récupère l'index de l'image dont les positions ont été récupérées
+        tabOfEvent=[event.x,self.video.height - event.y, frame_index] # créer un tab de la forme [posX,posY, time] //  inverting y so (0,0) is in bottom left corner
         self.PointHandler.addPoint(tabOfEvent) # appel d'une méthode de self.PointHandler pour ajouter tabOfEvent dans son tab of coordonnées
         self.video.forward_one_frame() # avance d'une frame dans la vidéo
+
+    def printGraphe(self, event=None) :
+        self.PointHandler.printGraph(self.video.fps)
+
+    def saveData(self, event=None) :
+        self.FileRepo.save_data(self.PointHandler.tabPoint)
 
     # function who get a path of a video in PATH, and then call the function load_video of self.video. Have an "event" argument for handling .bind
     def loadVideo(self,event=None):

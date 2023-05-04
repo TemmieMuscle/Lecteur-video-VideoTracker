@@ -16,16 +16,13 @@ class Application(tk.Tk):
         # create a view and place it on the root window
         view = View(self)
 
+        # Create all models
         pointHandler=PointHandler()
-        # create a video model
         video = Video(view)
-        #video.play_video()
-
-        # create a FileRepo model
         fileRepo=FileRepo()
 
         # create a controller
-        controller = Controller(video, view,fileRepo, pointHandler)
+        controller = Controller(video, view, fileRepo, pointHandler)
 
         # set the controller to view
         view.setController(controller)

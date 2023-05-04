@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import tkinter as tk
 from tkinter import filedialog as fd
+from tkinter import messagebox as mb
 
 class FileRepo : 
     def __init__(self) :
@@ -39,24 +40,18 @@ class FileRepo :
         else :
             return None
     
-    #########################################################################################
-    def save_data(self) : ######## TO BE DISCONTINUED mais on verra quand on fera les points etc.
-        import random as rd
-        from . import Point
-
-        fr = FileRepo()
-
-        def randomPoints(n:int) -> list: # creates and returns a list of 10 random points for testing
-            l = []
-            for i in range(n) : # Creating n random points
-                tempPoint = Point(rd.randint(0,100), rd.randint(0,100))
-                l.append(tempPoint)
-            return l
+    def save_data(self, tabPoints) : ### BEWARE -> x and y are in PIXELS AND timestamp is in FRAME
+        if len(tabPoints) < 1 :
+            mb.showerror("Erreur", "Aucune donnée disponible. Avez vous au moins crée un point ?")
+            return
         
-        pointList = randomPoints(10)
-        timeList = [i for i in range(10)]
+        fr = FileRepo()
+        pointList = []
+        timeList = []
+        for i in range(len(tabPoints)) :
+            pointList.append(tabPoints[i][0])
+            timeList.append(tabPoints[i][1])
 
         data = fr.transformDataToCsv(pointList, timeList) # converting data to csv
         fr.save(data, False)
         print("Data saved !")
-    #########################################################################################

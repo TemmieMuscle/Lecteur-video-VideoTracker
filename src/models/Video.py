@@ -13,9 +13,7 @@ class Video():
         self.frame_index = 0
         self.frames_max = -1 # is -1 when nothing is loaded
         self.idImage = -1
-
-    def getFrame(self):
-        return self.frame_index
+        self.fps = -1
 
     # Load video with a file given
     def load_video(self,PATH) :
@@ -25,6 +23,7 @@ class Video():
         self.height = self.cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
         self.canvas.config(width = self.width, height = self.height)
         self.frames_max = int(self.cap.get(cv2.CAP_PROP_FRAME_COUNT)) - 1
+        self.fps = self.cap.get(cv2.CAP_PROP_FPS)
 
         self.update_indexAndIndexMax() # setup indexation
         self.skip_to_first_frame() # go back to frame 1

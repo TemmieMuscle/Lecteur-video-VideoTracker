@@ -21,9 +21,9 @@ class View(tk.Frame):
         self.fileMenu.add_command(label="Quitter")#4
         menuBarre.add_cascade(label="File",menu=self.fileMenu)
     
-        self.viewMenu=tk.Menu(menuBarre, tearoff=0)
-        self.viewMenu.add_command(label="Afficher Graphes")
-        menuBarre.add_cascade(label="View",menu=self.viewMenu)
+        viewMenu=tk.Menu(menuBarre, tearoff=0)
+        viewMenu.add_command(label="Afficher Graphes")
+        menuBarre.add_cascade(label="View",menu=viewMenu)
 
         editMenu=tk.Menu(menuBarre, tearoff=0)
         editMenu.add_command(label="Tableau Valeurs")
