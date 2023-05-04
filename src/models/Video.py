@@ -14,6 +14,7 @@ class Video():
         self.frames_max = -1 # is -1 when nothing is loaded
         self.idImage = -1
         self.fps = -1
+        self.cap = None
 
     # Load video with a file given
     def load_video(self,PATH) :
@@ -59,25 +60,27 @@ class Video():
                 self.canvas.after(self.delay, self.play_video) 
 
     def forward_one_frame(self) : # reads() and updates() once
-        if self.frame_index < self.frames_max :
+        if self.frame_index < self.frames_max and self.cap:
             self.read()
             self.update_view()
 
     def backward_one_frame(self) : # goes back one frame
-        if self.frame_index > 1 :
+        if self.frame_index > 1 and self.cap:
             self.frame_index -= 2
             self.cap.set(cv2.CAP_PROP_POS_FRAMES, self.frame_index)
             self.forward_one_frame()
 
     def skip_to_first_frame(self) : # goes back to the first frame
-        self.frame_index = 0
-        self.cap.set(cv2.CAP_PROP_POS_FRAMES, self.frame_index)
-        self.forward_one_frame()
+        if self.cap :
+            self.frame_index = 0
+            self.cap.set(cv2.CAP_PROP_POS_FRAMES, self.frame_index)
+            self.forward_one_frame()
 
     def skip_to_last_frame(self) : # goes to the last frame
-        self.frame_index = self.frames_max - 1
-        self.cap.set(cv2.CAP_PROP_POS_FRAMES, self.frame_index)
-        self.forward_one_frame()
+        if self.cap :
+            self.frame_index = self.frames_max - 1
+            self.cap.set(cv2.CAP_PROP_POS_FRAMES, self.frame_index)
+            self.forward_one_frame()
 
     
     def pause_video(self): # set video in pause if it was playing, or play it if it was pause
@@ -88,7 +91,7 @@ class Video():
             self.play_video()
 
     def update_indexAndIndexMax(self): # updates view for frames / frames_max
-        frameActualOnFrameMax=str(self.frame_index)+"/"+str(self.frames_max)
+        frameActualOnFrameMax="Frame " + str(self.frame_index)+"/"+str(self.frames_max)
         self.compteurFrame.config(text=frameActualOnFrameMax)
 
     # Release the video source when the object is destroyed
