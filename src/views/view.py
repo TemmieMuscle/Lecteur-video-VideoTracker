@@ -33,12 +33,13 @@ class View(tk.Frame):
         self.viewMenu.add_command(label="Afficher Graphes",font=laFonte)
         menuBarre.add_cascade(label="View",menu=self.viewMenu,font=laFonte)
 
-        editMenu=tk.Menu(menuBarre, tearoff=0)
-        editMenu.add_command(label="Tableau Valeurs",font=laFonte)
-        editMenu.add_separator()
-        editMenu.add_command(label="Définir Echelle X",font=laFonte)
-        editMenu.add_command(label="Définir Echelle Y",font=laFonte)
-        menuBarre.add_cascade(label="Edit",menu=editMenu,font=laFonte)
+        self.editMenu=tk.Menu(menuBarre, tearoff=0)
+        self.editMenu.add_command(label="Mode édition",font=laFonte)
+        self.editMenu.add_command(label="Tableau Valeurs",font=laFonte)
+        self.editMenu.add_separator()
+        self.editMenu.add_command(label="Définir Echelle X",font=laFonte)
+        self.editMenu.add_command(label="Définir Echelle Y",font=laFonte)
+        menuBarre.add_cascade(label="Edit",menu=self.editMenu,font=laFonte)
 
         self.parent.config(menu=menuBarre)
 
