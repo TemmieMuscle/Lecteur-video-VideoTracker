@@ -34,7 +34,7 @@ class Controller:
     # fonction utilisé lors d'un click sur une frame de la vidéo => gére l'ajout des coordonnées du click et le numéro de la frame dans PointHandler
     def addPointInPointHandler(self,event):
         index=self.video.getFrame() # récupère l'index de l'image dont les positions ont été récupéré
-        tabOfEvent=[index,event.x,event.y] # créer un tab de la forme [index,posX,posY]
+        tabOfEvent=[index,event.x,self.video.height - event.y] # créer un tab de la forme [index,posX,posY] //  inverting y so (0,0) is in bottom left corner
         self.PointHandler.addPoint(tabOfEvent) # appel d'une méthode de self.PointHandler pour ajouter tabOfEvent dans son tab of coordonnées
         self.video.forward_one_frame() # avance d'une frame dans la vidéo
 
