@@ -2,6 +2,7 @@ from models.Video import Video
 from views.view import View
 from controllers.Controller import Controller
 from models.FileRepo import FileRepo
+from models.PointHandler import PointHandler
 
 import tkinter as tk
 
@@ -23,7 +24,7 @@ class Application(tk.Tk):
         fileRepo=FileRepo()
 
         # create a controller
-        controller = Controller(video, view,fileRepo)
+        controller = Controller(video, view,fileRepo, PointHandler)
 
         # set the controller to view
         view.setController(controller)
@@ -31,8 +32,6 @@ class Application(tk.Tk):
 
 if __name__ == '__main__':
     app = Application()
-
-    # end of the main loop
     app.mainloop()
 
     

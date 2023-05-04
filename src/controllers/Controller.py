@@ -2,17 +2,20 @@ import tkinter as tk
 
 class Controller:
 
-    def __init__(self, video, view, FileRepo):
+    def __init__(self, video, view, FileRepo, PointHandler):
         
         self.video = video
         self.view = view
         self.FileRepo = FileRepo
+        self.PointHandler = PointHandler
         
         # Menu configuration
         self.view.fileMenu.entryconfig(0, command=self.loadVideo) 
         self.view.fileMenu.entryconfig(1, command=self.playAndLoadVideo) 
         self.view.fileMenu.entryconfig(3, command=self.FileRepo.save_data) ######## TO BE DISCONTINUED mais on verra quand on fera les points        
         self.view.fileMenu.entryconfig(4, command=self.quit)
+
+        self.view.viewMenu.entryconfig(0, command=self.PointHandler.printGraphe) 
 
         # Video action buttons
         self.view.play_btn.config(command=self.video.pause_video)
