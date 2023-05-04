@@ -34,10 +34,10 @@ class FileRepo :
         ('WEBM files', '*.webm'))
 
         filename = fd.askopenfilename(title='Choose the video',filetypes=filetypes)
-        if filename == None : # if canceled by user
-            return
-
-        return filename
+        if filename :
+            return filename
+        else :
+            return None
     
     #########################################################################################
     def save_data(self) : ######## TO BE DISCONTINUED mais on verra quand on fera les points etc.

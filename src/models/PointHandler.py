@@ -27,7 +27,7 @@ class PointHandler():
         self.tabPoint=[]
 
     # créer le graphe et l'affiche avec matplotlib
-    def printGraphe():
+    def printGraphe(self):
 
         ####################################
         import random as rd
@@ -55,7 +55,9 @@ class PointHandler():
 
         answer = mb.askyesnocancel("Question", "Voulez-vous les graphiques dans des fenêtres séparées ?")
 
-        if answer :
+        if answer is None:
+            print("User canceled action")
+        elif answer == True:
             fig, ax1 = plt.subplots()
             ax1.plot(timeValues, xValues)
             ax1.set(xlabel='t', ylabel='x',title='x(t)')
@@ -70,11 +72,25 @@ class PointHandler():
             ax3.plot(xValues, yValues)
             ax3.set(xlabel='x', ylabel='y',title='y(x)')
             ax3.grid()
+
             plt.show()
-        elif answer is None:
-            print("Haha")
         else :
-            print("hho")
+            fig, (ax1, ax2, ax3) = plt.subplots(1, 3)
+
+            ax1.plot(timeValues, xValues)
+            ax1.set(xlabel='t', ylabel='x',title='x(t)')
+            ax1.grid()
+
+            ax2.plot(timeValues, yValues)
+            ax2.set(xlabel='t', ylabel='y',title='y(t)')
+            ax2.grid()
+
+            ax3.plot(xValues, yValues)
+            ax3.set(xlabel='x', ylabel='y',title='y(x)')
+            ax3.grid()
+
+            plt.tight_layout()
+            plt.show()
 
     def getTab(self):
         return self.tabPoint

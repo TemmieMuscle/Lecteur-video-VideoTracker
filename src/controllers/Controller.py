@@ -41,14 +41,14 @@ class Controller:
     # function who get a path of a video in PATH, and then call the function load_video of self.video. Have an "event" argument for handling .bind
     def loadVideo(self,event=None):
         PATH=self.FileRepo.getFile() # get path with class FileRepo
-        if isinstance(PATH,str)==True: # verify that PATH is STR
+        if PATH != None : # verify that PATH is valid
             self.video.load_video(PATH)
             self.PointHandler.cleanTab() # clean the tab in PointHandler
 
     # function who get a path of a video in PATH, and then call the function load_and_play_video of self.video. Have an "event" argument for handling .bind
     def playAndLoadVideo(self,event=None):
         PATH=self.FileRepo.getFile() # get path with class FileRepo
-        if isinstance(PATH,str)==True: # verify that PATH is STR
+        if PATH != None : # verify that PATH is valid
             self.video.load_and_play_video(PATH)
             self.PointHandler.cleanTab() # clean the tab in PointHandler
 
