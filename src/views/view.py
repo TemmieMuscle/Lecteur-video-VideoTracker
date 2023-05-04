@@ -18,6 +18,7 @@ class View(tk.Frame):
         self.fileMenu.add_command(label="Lire Vidéo")#1
         self.fileMenu.add_separator()
         self.fileMenu.add_command(label="Exporter CSV")#3
+        self.fileMenu.add_command(label="Quitter")#4
         menuBarre.add_cascade(label="File",menu=self.fileMenu)
     
         viewMenu=tk.Menu(menuBarre, tearoff=0)
