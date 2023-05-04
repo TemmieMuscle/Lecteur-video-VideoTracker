@@ -92,7 +92,6 @@ class Video():
         frameActualOnFrameMax=str(self.frame_index)+"/"+str(self.frames_max)
         self.compteurFrame.config(text=frameActualOnFrameMax)
 
-
     # Release the video source when the object is destroyed
     def __del__(self):
         try : 
