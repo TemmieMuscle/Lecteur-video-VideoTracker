@@ -59,7 +59,7 @@ class View(tk.Frame):
         self.frameActuelle_lbl.config(text = "")
 
         self.next_btn = ttk.Button(cadreBas, text ='⏩')
-        self.next_btn.pack(side='right',padx=5, pady=20)  
+        self.next_btn.pack(side='right',padx=10, pady=20)  
         self.back_btn = ttk.Button(cadreBas, text ='⏪')
         self.back_btn.pack(side='right',padx=5, pady=20)  
 
