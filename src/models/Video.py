@@ -14,6 +14,9 @@ class Video():
         self.frames_max = -1 # is -1 when nothing is loaded
         self.idImage = -1
 
+    def getFrame(self):
+        return self.frame_index
+
     # Load video with a file given
     def load_video(self,PATH) :
         # get all data needed about the video

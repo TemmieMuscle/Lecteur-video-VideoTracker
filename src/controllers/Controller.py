@@ -28,17 +28,29 @@ class Controller:
         self.view.parent.bind('<Control-o>',self.loadVideo)
         self.view.parent.bind('<Control-q>',self.playAndLoadVideo)
 
+        # set click event
+        self.view.cadreMilieu.bind('<Button-1>',self.addPointInPointHandler)
+
+    # fonction utilisé lors d'un click sur une frame de la vidéo => gére l'ajout des coordonnées du click et le numéro de la frame dans PointHandler
+    def addPointInPointHandler(self,event):
+        index=self.video.getFrame() # récupère l'index de l'image dont les positions ont été récupéré
+        tabOfEvent=[index,event.x,event.y] # créer un tab de la forme [index,posX,posY]
+        self.PointHandler.addPoint(tabOfEvent) # appel d'une méthode de self.PointHandler pour ajouter tabOfEvent dans son tab of coordonnées
+        self.video.forward_one_frame() # avance d'une frame dans la vidéo
+
     # function who get a path of a video in PATH, and then call the function load_video of self.video. Have an "event" argument for handling .bind
     def loadVideo(self,event=None):
         PATH=self.FileRepo.getFile() # get path with class FileRepo
         if isinstance(PATH,str)==True: # verify that PATH is STR
             self.video.load_video(PATH)
+            self.PointHandler.cleanTab() # clean the tab in PointHandler
 
     # function who get a path of a video in PATH, and then call the function load_and_play_video of self.video. Have an "event" argument for handling .bind
     def playAndLoadVideo(self,event=None):
         PATH=self.FileRepo.getFile() # get path with class FileRepo
         if isinstance(PATH,str)==True: # verify that PATH is STR
             self.video.load_and_play_video(PATH)
+            self.PointHandler.cleanTab() # clean the tab in PointHandler
 
     # function who call function destroy of tkinter on self.view to stop app
     def quit(self):
