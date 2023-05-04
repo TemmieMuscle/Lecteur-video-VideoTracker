@@ -1,1 +1,0 @@
-On a fait 2 sprint (un pour l'IHM/FileRepo et un pour video/test).
