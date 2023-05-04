@@ -27,7 +27,7 @@ class Application(tk.Tk):
 
         # set the controller to view
         view.setController(controller)
-        
+  
 
 if __name__ == '__main__':
     app = Application()
