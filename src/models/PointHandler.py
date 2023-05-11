@@ -38,8 +38,8 @@ class PointHandler:
 
         self.tabScale.append([x,y])
         if len(self.tabScale) >= 2 :
-            self.setScale(self.tabScale[0], self.tabScale[1]) # calls setscale with points
-            self.tabScale = [] # resets tabScale
+            self.setScale(self.tabScale[0], self.tabScale[1]) # calls setscale with
+            self.tabScale = []
 
 
     # rénitialise le tableau en le rendant vide
