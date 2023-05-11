@@ -62,7 +62,6 @@ class Controller:
             if self.video.cap != None:
                 tabOfEvent=[event.x,self.video.height - event.y] # créer un tab de la forme [posX,posY, time] //  inverting y so (0,0) is in bottom left corner
                 self.PointHandler.addScalePoint(tabOfEvent) # appel d'une méthode de self.PointHandler pour ajouter tabOfEvent dans son tab of coordonnées
-                print("oui")
 
     def printGraphe(self, event=None) :
         self.PointHandler.printGraph(self.video.fps)
