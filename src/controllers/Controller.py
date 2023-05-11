@@ -67,7 +67,7 @@ class Controller:
         self.PointHandler.printGraph(self.video.fps)
 
     def saveData(self, event=None) :
-        self.FileRepo.save_data(self.PointHandler.tabPoint)
+        self.FileRepo.save_data(self.PointHandler.tabPoint) # faire fonction pointhandler qui renvoi un tab formatté
 
     # function who get a path of a video in PATH, and then call the function load_video of self.video. Have an "event" argument for handling .bind
     def loadVideo(self,event=None):
