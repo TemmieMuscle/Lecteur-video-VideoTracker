@@ -38,7 +38,7 @@ class Controller:
 
         # set click event
         self.view.cadreMilieu.bind('<Button-1>',self.addPointInPointHandler)
-        self.view.cadreMilieu.bind('<Button-2>',self.addScalePointInPointHandler)
+        self.view.cadreMilieu.bind('<Button-3>',self.addScalePointInPointHandler)
 
     def switchMode(self, event=None) : # switch edition mode
         if self.editionMode == False:
@@ -59,10 +59,10 @@ class Controller:
             self.video.forward_one_frame() # avance d'une frame dans la vidéo
 
     def addScalePointInPointHandler(self,event):
-            frame_index=self.video.frame_index # récupère l'index de l'image dont les positions ont été récupérées
-            tabOfEvent=[event.x,self.video.height - event.y, frame_index] # créer un tab de la forme [posX,posY, time] //  inverting y so (0,0) is in bottom left corner
-            self.PointHandler.addPoint(tabOfEvent) # appel d'une méthode de self.PointHandler pour ajouter tabOfEvent dans son tab of coordonnées
-            self.video.forward_one_frame() # avance d'une frame dans la vidéo  
+            if self.video.cap != None:
+                tabOfEvent=[event.x,self.video.height - event.y] # créer un tab de la forme [posX,posY, time] //  inverting y so (0,0) is in bottom left corner
+                self.PointHandler.addScalePoint(tabOfEvent) # appel d'une méthode de self.PointHandler pour ajouter tabOfEvent dans son tab of coordonnées
+                print("oui")
 
     def printGraphe(self, event=None) :
         self.PointHandler.printGraph(self.video.fps)

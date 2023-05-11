@@ -32,15 +32,13 @@ class PointHandler:
 
     # same as above but puts the points in tabScale and checks if tab is full
     def addScalePoint(self, tabOfEvent) :
-        index = tabOfEvent[2] # no use here
         x = tabOfEvent[0]
         y = tabOfEvent[1]
 
-        self.tabScale.append([x,y])
+        self.tabScale.append(Point(x,y))
         if len(self.tabScale) >= 2 :
             self.setScale(self.tabScale[0], self.tabScale[1]) # calls setscale with
             self.tabScale = []
-
 
     # rénitialise le tableau en le rendant vide
     def cleanTab(self):
@@ -51,12 +49,12 @@ class PointHandler:
         x1, y1 = point1.getX(), point1.getY()
         x2, y2 = point2.getX(), point2.getY()
 
-        pixelLength = int(math.distance([x1,y1], [x2,y2])) # get distance between points clicked by user
+        pixelLength = int(math.dist([x1,y1], [x2,y2])) # get distance between points clicked by user
 
         answer = 0
         while answer <= 0 :
-            realLength = sd.askinteger("Définition de l'échelle", "Quelle est la distance séparant les 2 points ?",minvalue=0, maxvalue=100)
-        self.scale = realLength / pixelLength # set self.scale to updated scale
+            answer = sd.askinteger("Définition de l'échelle", "Quelle est la distance séparant les 2 points ?",minvalue=0, maxvalue=100)
+        self.scale = answer / pixelLength # set self.scale to updated scale
 
     # créer le graphe et l'affiche avec matplotlib
     def printGraph(self, fps): # could possibly go into view
