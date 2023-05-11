@@ -15,7 +15,7 @@ class Controller:
         # Menu configuration
         self.view.fileMenu.entryconfig(0, command=self.loadVideo) 
         self.view.fileMenu.entryconfig(1, command=self.playAndLoadVideo) 
-        self.view.fileMenu.entryconfig(3, command=self.saveData) ######## TO BE DISCONTINUED mais on verra quand on fera les points        
+        self.view.fileMenu.entryconfig(3, command=self.saveData)     
         self.view.fileMenu.entryconfig(4, command=self.quit)
 
         self.view.viewMenu.entryconfig(0, command=self.printGraphe) 
