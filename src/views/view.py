@@ -77,5 +77,7 @@ class View(tk.Frame):
            
         cadreBas.pack(side='bottom',fill="x")
 
+        
+
     def setController(self, controller):
         self.controller = controller
