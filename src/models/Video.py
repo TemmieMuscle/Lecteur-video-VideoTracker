@@ -112,4 +112,3 @@ if __name__ == "__main__" :
     vid.play_video()
 
     window.mainloop()
-    
