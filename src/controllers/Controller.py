@@ -20,6 +20,7 @@ class Controller:
         self.view.viewMenu.entryconfig(0, command=self.printGraphe) 
 
         self.view.editMenu.entryconfig(0, command=self.switchMode)
+        self.view.editMenu.entryconfig(1, command=self.PointHandler.showTable)
 
         # Video action buttons
         self.view.play_btn.config(command=self.video.pause_video)

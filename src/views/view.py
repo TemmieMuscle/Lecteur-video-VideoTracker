@@ -25,20 +25,20 @@ class View(tk.Frame):
         laFonte=("Tekton Pro",11)
 
         self.fileMenu=tk.Menu(menuBarre, tearoff=0) # labels are indexed in fileMenu (to be used with entry config in controller)
-        self.fileMenu.add_command(label="Charger Vidéo",font=laFonte) #0
-        self.fileMenu.add_command(label="Lire Vidéo",font=laFonte)#1
+        self.fileMenu.add_command(label="Charger une vidéo",font=laFonte) #0
+        self.fileMenu.add_command(label="Lire une vidéo",font=laFonte)#1
         self.fileMenu.add_separator()
-        self.fileMenu.add_command(label="Exporter CSV",font=laFonte)#3
+        self.fileMenu.add_command(label="Exporter en CSV",font=laFonte)#3
         self.fileMenu.add_command(label="Quitter",font=laFonte)#4
         menuBarre.add_cascade(label="File",menu=self.fileMenu,font=laFonte)
     
         self.viewMenu=tk.Menu(menuBarre, tearoff=0)
-        self.viewMenu.add_command(label="Afficher Graphes",font=laFonte)
+        self.viewMenu.add_command(label="Afficher les graphes",font=laFonte)
         menuBarre.add_cascade(label="View",menu=self.viewMenu,font=laFonte)
 
         self.editMenu=tk.Menu(menuBarre, tearoff=0)
         self.editMenu.add_command(label="Mode édition",font=laFonte)
-        self.editMenu.add_command(label="Tableau Valeurs",font=laFonte)
+        self.editMenu.add_command(label="Tableau de points",font=laFonte)
         menuBarre.add_cascade(label="Edit",menu=self.editMenu,font=laFonte)
 
         self.parent.config(menu=menuBarre)
@@ -136,6 +136,24 @@ class View(tk.Frame):
         plt.tight_layout()
         plt.show()
 
+    def showTable(self, xValues, yValues, timeValues) :
+ 
+        class Table:
+            def __init__(self,root):
+                # setup table
+                for i in range(len(xValues)): 
+                    for j in range(3):
+                        self.e = tk.Entry(root, width=30,font=('Arial',16))
+                        self.e.grid(row=i, column=j)
+                        self.e.insert(tk.END, lst[i][j])
+        
+        # input data into table
+        lst = [(xValues[i], yValues[i], timeValues[i]) for i in range(len(xValues))]
+        
+        # create root window
+        root = tk.Toplevel(self.parent)
+        t = Table(root)
+        root.mainloop()
 
 
     def setController(self, controller):

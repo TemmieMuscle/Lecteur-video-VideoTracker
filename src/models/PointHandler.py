@@ -17,8 +17,8 @@ class PointHandler:
     # si il n'existe pas, append le contenu de tabofEvent dans self.tabPoint
     def addPoint(self,tabOfEvent):
         index = tabOfEvent[2]
-        x = tabOfEvent[0]
-        y = tabOfEvent[1]
+        x = round(tabOfEvent[0], 3)
+        y = round(tabOfEvent[1], 3)
         for i in range(len(self.tabPoint)):
             if self.tabPoint[i][1]==index:
                 self.tabPoint[i][1]=Point(x,y)
@@ -58,6 +58,7 @@ class PointHandler:
             else:
                 realLength=answer
         self.scale = realLength / pixelLength # set self.scale to updated scale
+        
 
     # créer le graphe et l'affiche avec matplotlib
     def printGraph(self, fps): # could possibly go into view
@@ -70,7 +71,7 @@ class PointHandler:
         xValues = []
         yValues = []
         for i in range(len(self.tabPoint)) :
-            xValues.append(self.tabPoint[i][0].getX()*self.scale) # x in meters
+            xValues.append(self.tabPoint[i][0].getX()*self.scale) # x in meters ######### ROUND TO 3 WHEN FORMATTING
             yValues.append(self.tabPoint[i][0].getY()*self.scale) # y in meters
             timeValues.append(self.tabPoint[i][1] / int(fps)) # time in seconds
         #print(xValues, yValues, timeValues)
@@ -84,6 +85,20 @@ class PointHandler:
         else :
             self.view.showGraphs(xValues, yValues, timeValues)
 
-    def getTab(self):
-        return self.tabPoint
+    def showTable(self):
+        timeValues = ["Temps en secondes"] # Mise en forme du tableau
+        xValues = ["Position horizontale en mètres"] 
+        yValues = ["Position verticale en mètres"]
+
+        if len(self.tabPoint) == 0:
+            self.view.DIALOG_NODATA()
+            return
+
+        for i in range(len(self.tabPoint)) :
+            xValues.append(self.tabPoint[i][0].getX()*self.scale) # x in meters
+            yValues.append(self.tabPoint[i][0].getY()*self.scale) # y in meter
+            timeValues.append(self.tabPoint[i][1] ) # time in frame
+        #print(xValues, yValues, timeValues)
+
+        self.view.showTable(xValues, yValues, timeValues)
     
