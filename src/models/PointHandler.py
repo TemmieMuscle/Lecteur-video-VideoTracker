@@ -9,7 +9,7 @@ class PointHandler:
         self.tabPoint=[] #tableau de sous tableaux de la forme [[posX,posY, index],...,[posX,posY, index]]
 
     # prend en argument un tableau de la forme [index,Point(posX,posY)] en tabOfEvent
-    # Parcoure le tableau self.tabPoint pour voir si l'index donnée dans tabofEvent existe deja dans self.tabPoint
+    # Parcoure le tableau self.tabPoint pour voir si l'index donnée dans tabofEvent existe deja dans self.tabPointw
     # si il existe, remplace les anciennes coordonnées liées à cet index par les nouvelles
     # si il n'existe pas, append le contenu de tabofEvent dans self.tabPoint
     def addPoint(self,tabOfEvent):
@@ -31,7 +31,7 @@ class PointHandler:
         self.tabPoint=[]
 
     # créer le graphe et l'affiche avec matplotlib
-    def printGraph(self, fps):
+    def printGraph(self, fps): # could possibly go into view
         if len(self.tabPoint) < 2: # Exits if not enough data created by user
             mb.showerror("Erreur", "Aucune donnée disponible. Avez vous au moins crée deux points ?")
             return
@@ -43,7 +43,7 @@ class PointHandler:
         for i in range(len(self.tabPoint)) :
             xValues.append(self.tabPoint[i][0].getX())
             yValues.append(self.tabPoint[i][0].getY())
-            timeValues.append(self.tabPoint[i][1] / fps) # time in seconds
+            timeValues.append(self.tabPoint[i][1] / int(fps)) # time in seconds
         #print(xValues, yValues, timeValues)
 
         answer = mb.askyesnocancel("Choix décisif", "Voulez-vous les graphiques dans des fenêtres séparées ?")
