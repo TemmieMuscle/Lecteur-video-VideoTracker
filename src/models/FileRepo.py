@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
 import tkinter as tk
 from tkinter import filedialog as fd
-from tkinter import messagebox as mb
 
 class FileRepo : 
-    def __init__(self) :
-        pass
+    def __init__(self, view) :
+        self.view = view
         
     def transformDataToCsv(self,points,time) :
         csvString = "posX;posY;timestamp\n" # adding names to variables to follow / needed for csv
@@ -42,16 +41,15 @@ class FileRepo :
     
     def save_data(self, tabPoints) : ### BEWARE -> x and y are in PIXELS AND timestamp is in FRAME
         if len(tabPoints) < 1 :
-            mb.showerror("Erreur", "Aucune donnée disponible. Avez vous au moins crée un point ?")
+            self.view.DIALOG_NODATA()
             return
         
-        fr = FileRepo()
         pointList = []
         timeList = []
         for i in range(len(tabPoints)) :
             pointList.append(tabPoints[i][0])
             timeList.append(tabPoints[i][1])
 
-        data = fr.transformDataToCsv(pointList, timeList) # converting data to csv
-        fr.save(data, False)
+        data = self.transformDataToCsv(pointList, timeList) # converting data to csv
+        self.save(data, False)
         print("Data saved !")

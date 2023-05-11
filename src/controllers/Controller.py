@@ -1,5 +1,4 @@
 import tkinter as tk
-from tkinter import messagebox as mb
 
 class Controller:
 
@@ -42,7 +41,7 @@ class Controller:
 
     def switchMode(self, event=None) : # switch edition mode
         if self.editionMode == False:
-            answer = mb.askokcancel("Mode édition", "Vous pouvez maintenant ajouter des points sur la vidéo en cliquant dessus.\nAppuyez sur échap pour quitter ce mode.")
+            answer = self.view.DIALOG_EDITIONMODE()
             if answer == False:
                 return
         self.editionMode = not self.editionMode

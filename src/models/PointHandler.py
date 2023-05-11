@@ -2,12 +2,12 @@ import matplotlib.pyplot as plt
 import numpy as np
 from . import Point
 from .Video import Video
-from tkinter import messagebox as mb
-from tkinter import simpledialog as sd
 import math
 
 class PointHandler:
-    def __init__(self):
+    def __init__(self, view):
+        self.view = view
+
         self.tabPoint=[] #tableau de sous tableaux de la forme [[posX,posY, index],...,[posX,posY, index]]
         self.tabScale = [] # tableau des points utilisés pour l'échelle
         self.scale = 1 / 100  # définit l'échelle des points, ici, 100 pixel = 1m -> a utiliser comme un scalaire : k pixels -> k*scale metres
@@ -53,7 +53,7 @@ class PointHandler:
 
         realLength = 0
         while realLength <= 0 :
-            answer = sd.askinteger("Définition de l'échelle", "Quelle est la distance séparant les 2 points ?")
+            answer = self.view.DIALOG_SETSCALE()
             if answer==None:
                 return
             else:
@@ -63,7 +63,7 @@ class PointHandler:
     # créer le graphe et l'affiche avec matplotlib
     def printGraph(self, fps): # could possibly go into view
         if len(self.tabPoint) < 2: # Exits if not enough data created by user
-            mb.showerror("Erreur", "Aucune donnée disponible. Avez vous au moins crée deux points ?")
+            self.view.DIALOG_NOTENOUGHPOINTS()
             return
 
         # Data for plotting
@@ -76,10 +76,10 @@ class PointHandler:
             timeValues.append(self.tabPoint[i][1] / int(fps)) # time in seconds
         #print(xValues, yValues, timeValues)
 
-        answer = mb.askyesnocancel("Choix décisif", "Voulez-vous les graphiques dans des fenêtres séparées ?")
-
+        answer = self.view.DIALOG_SEPARATEDWINDOWS()
         if answer is None:
-            print("User canceled action")
+            #print("User canceled action")
+            pass
         elif answer == True:
             fig, ax1 = plt.subplots()
             ax1.plot(timeValues, xValues)

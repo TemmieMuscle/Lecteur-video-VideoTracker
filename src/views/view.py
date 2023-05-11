@@ -1,6 +1,8 @@
 import tkinter as tk
 import PIL.Image, PIL.ImageTk
 from tkinter import ttk
+from tkinter import messagebox as mb
+from tkinter import simpledialog as sd
 
 class View(tk.Frame):
 
@@ -74,7 +76,28 @@ class View(tk.Frame):
            
         cadreBas.pack(side='bottom',fill="x")
 
-        
+
+    ### ALL DIALOGS WINDOWS FOR MODELS AND CONTROLLER:
+    # FILEREPO
+    def DIALOG_NODATA(self) :
+        mb.showerror("Erreur", "Aucune donnée disponible. Avez vous au moins crée un point ?")
+
+    # POINTHANDLER
+    def DIALOG_SETSCALE(self) :
+        return sd.askinteger("Définition de l'échelle", "Quelle est la distance séparant les 2 points ?")
+    
+    def DIALOG_NOTENOUGHPOINTS(self) :
+        mb.showerror("Erreur", "Aucune donnée disponible. Avez vous au moins crée deux points ?")
+
+    def DIALOG_SEPARATEDWINDOWS(self) :
+        return mb.askyesnocancel("Choix décisif", "Voulez-vous les graphiques dans des fenêtres séparées ?")
+    
+    # CONTROLLER
+    def DIALOG_EDITIONMODE(self) :
+        return mb.askokcancel("Mode édition", "Vous pouvez maintenant ajouter des points sur la vidéo en cliquant dessus.\nAppuyez sur échap pour quitter ce mode.")
+
+
+
 
     def setController(self, controller):
         self.controller = controller

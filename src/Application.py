@@ -17,9 +17,9 @@ class Application(tk.Tk):
         view = View(self)
 
         # Create all models
-        pointHandler=PointHandler()
+        pointHandler=PointHandler(view)
         video = Video(view)
-        fileRepo=FileRepo()
+        fileRepo=FileRepo(view)
 
         # create a controller
         controller = Controller(video, view, fileRepo, pointHandler)
