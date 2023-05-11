@@ -51,10 +51,14 @@ class PointHandler:
 
         pixelLength = int(math.dist([x1,y1], [x2,y2])) # get distance between points clicked by user
 
-        answer = 0
-        while answer <= 0 :
-            answer = sd.askinteger("Définition de l'échelle", "Quelle est la distance séparant les 2 points ?",minvalue=0, maxvalue=100)
-        self.scale = answer / pixelLength # set self.scale to updated scale
+        realLength = 0
+        while realLength <= 0 :
+            answer = sd.askinteger("Définition de l'échelle", "Quelle est la distance séparant les 2 points ?")
+            if answer==None:
+                return
+            else:
+                realLength=answer
+        self.scale = realLength / pixelLength # set self.scale to updated scale
 
     # créer le graphe et l'affiche avec matplotlib
     def printGraph(self, fps): # could possibly go into view
