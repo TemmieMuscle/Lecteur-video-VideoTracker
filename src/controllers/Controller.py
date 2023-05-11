@@ -10,6 +10,7 @@ class Controller:
         self.FileRepo = FileRepo
         self.PointHandler = PointHandler
         self.editionMode = False # can the user add points by clicking the video ?
+        self.scaleMode = False
         
         # Menu configuration
         self.view.fileMenu.entryconfig(0, command=self.loadVideo) 
@@ -37,15 +38,16 @@ class Controller:
 
         # set click event
         self.view.cadreMilieu.bind('<Button-1>',self.addPointInPointHandler)
+        self.view.cadreMilieu.bind('<Button-2>',self.addScalePointInPointHandler)
 
     def switchMode(self, event=None) : # switch edition mode
-        if not self.editionMode :
+        if self.editionMode == False:
             answer = mb.askokcancel("Mode édition", "Vous pouvez maintenant ajouter des points sur la vidéo en cliquant dessus.\nAppuyez sur échap pour quitter ce mode.")
-            if not answer :
+            if answer == False:
                 return
         self.editionMode = not self.editionMode
 
-    def switchEditionOff(self, event) : # turn edition mode using escape key
+    def switchEditionOff(self, event=None) : # turn edition mode using escape key
         self.editionMode = False
 
     # fonction utilisé lors d'un click sur une frame de la vidéo => gére l'ajout des coordonnées du click et le numéro de la frame dans PointHandler
@@ -55,6 +57,12 @@ class Controller:
             tabOfEvent=[event.x,self.video.height - event.y, frame_index] # créer un tab de la forme [posX,posY, time] //  inverting y so (0,0) is in bottom left corner
             self.PointHandler.addPoint(tabOfEvent) # appel d'une méthode de self.PointHandler pour ajouter tabOfEvent dans son tab of coordonnées
             self.video.forward_one_frame() # avance d'une frame dans la vidéo
+
+    def addScalePointInPointHandler(self,event):
+            frame_index=self.video.frame_index # récupère l'index de l'image dont les positions ont été récupérées
+            tabOfEvent=[event.x,self.video.height - event.y, frame_index] # créer un tab de la forme [posX,posY, time] //  inverting y so (0,0) is in bottom left corner
+            self.PointHandler.addPoint(tabOfEvent) # appel d'une méthode de self.PointHandler pour ajouter tabOfEvent dans son tab of coordonnées
+            self.video.forward_one_frame() # avance d'une frame dans la vidéo  
 
     def printGraphe(self, event=None) :
         self.PointHandler.printGraph(self.video.fps)
