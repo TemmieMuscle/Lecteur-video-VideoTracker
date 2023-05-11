@@ -1,8 +1,9 @@
-import tkinter as tk
 import PIL.Image, PIL.ImageTk
+import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox as mb
 from tkinter import simpledialog as sd
+import matplotlib.pyplot as plt
 
 class View(tk.Frame):
 
@@ -84,7 +85,7 @@ class View(tk.Frame):
 
     # POINTHANDLER
     def DIALOG_SETSCALE(self) :
-        return sd.askinteger("Définition de l'échelle", "Quelle est la distance séparant les 2 points ?")
+        return sd.askinteger("Définition de l'échelle", "Quelle est la distance séparant les 2 points ? (en mètres)")
     
     def DIALOG_NOTENOUGHPOINTS(self) :
         mb.showerror("Erreur", "Aucune donnée disponible. Avez vous au moins crée deux points ?")
@@ -96,6 +97,44 @@ class View(tk.Frame):
     def DIALOG_EDITIONMODE(self) :
         return mb.askokcancel("Mode édition", "Vous pouvez maintenant ajouter des points sur la vidéo en cliquant dessus.\nAppuyez sur échap pour quitter ce mode.")
 
+    ### POINT HANDLER RELATED
+    def showSeparatedGraphs(self, xValues, yValues, timeValues) :
+        fig, ax1 = plt.subplots()
+        ax1.plot(timeValues, xValues)
+        ax1.set(xlabel='Temps (en s)', ylabel='Position horizontale (en m)',title='Position horizontale en fonction du temps')
+        ax1.grid()
+
+        fig, ax2 = plt.subplots()
+        ax2.plot(timeValues, yValues)
+        ax2.set(xlabel='Temps (en s)', ylabel='Position verticale (en m)',title='Position verticale en fonction du temps')
+        ax2.grid()
+
+        fig, ax3 = plt.subplots()
+        ax3.plot(xValues, yValues)
+        ax3.set(xlabel='Position horizontale (en m)', ylabel='Position verticale (en m)',title='Position verticale en fonction de la position horizontale')
+        ax3.grid()
+
+        plt.show()
+
+    def showGraphs(self, xValues, yValues, timeValues) :
+        fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2)
+
+        ax1.plot(timeValues, xValues)
+        ax1.set(xlabel='Temps (en s)', ylabel='Position horizontale (en m)',title='Position horizontale en fonction du temps')
+        ax1.grid()
+
+        ax2.plot(timeValues, yValues)
+        ax2.set(xlabel='Temps (en s)', ylabel='Position verticale (en m)',title='Position verticale en fonction du temps')
+        ax2.grid()
+
+        ax3.plot(xValues, yValues)
+        ax3.set(xlabel='Position horizontale (en m)', ylabel='Position verticale (en m)',title='Position verticale en fonction de la position horizontale')
+        ax3.grid()
+
+        ax4.axis('off')
+
+        plt.tight_layout()
+        plt.show()
 
 
 

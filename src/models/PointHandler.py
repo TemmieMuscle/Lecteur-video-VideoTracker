@@ -1,4 +1,3 @@
-import matplotlib.pyplot as plt
 import numpy as np
 from . import Point
 from .Video import Video
@@ -81,39 +80,9 @@ class PointHandler:
             #print("User canceled action")
             pass
         elif answer == True:
-            fig, ax1 = plt.subplots()
-            ax1.plot(timeValues, xValues)
-            ax1.set(xlabel='Temps (en s)', ylabel='Position horizontale (en m)',title='x(t)')
-            ax1.grid()
-
-            fig, ax2 = plt.subplots()
-            ax2.plot(timeValues, yValues)
-            ax2.set(xlabel='Temps (en s)', ylabel='Position verticale (en m)',title='y(t)')
-            ax2.grid()
-
-            fig, ax3 = plt.subplots()
-            ax3.plot(xValues, yValues)
-            ax3.set(xlabel='Position horizontale (en m)', ylabel='Position verticale (en m)',title='y(x)')
-            ax3.grid()
-
-            plt.show()
+            self.view.showSeparatedGraphs(xValues, yValues, timeValues)
         else :
-            fig, (ax1, ax2, ax3) = plt.subplots(1, 3)
-
-            ax1.plot(timeValues, xValues)
-            ax1.set(xlabel='Temps (en s)', ylabel='Position horizontale (en m)',title='x(t)')
-            ax1.grid()
-
-            ax2.plot(timeValues, yValues)
-            ax2.set(xlabel='Temps (en s)', ylabel='Position verticale (en m)',title='y(t)')
-            ax2.grid()
-
-            ax3.plot(xValues, yValues)
-            ax3.set(xlabel='Position horizontale (en m)', ylabel='Position verticale (en m)',title='y(x)')
-            ax3.grid()
-
-            plt.tight_layout()
-            plt.show()
+            self.view.showGraphs(xValues, yValues, timeValues)
 
     def getTab(self):
         return self.tabPoint
