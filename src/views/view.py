@@ -86,7 +86,7 @@ class View(tk.Frame):
 
     # POINTHANDLER
     def DIALOG_SETSCALE(self) :
-        return sd.askinteger("Définition de l'échelle", "Quelle est la distance séparant les 2 points ? (en mètres)")
+        return sd.askfloat("Définition de l'échelle", "Quelle est la distance séparant les 2 points ? (en mètres)")
     
     def DIALOG_NOTENOUGHPOINTS(self) :
         mb.showerror("Erreur", "Aucune donnée disponible. Avez vous au moins crée deux points ?")
@@ -106,6 +106,9 @@ class View(tk.Frame):
  
     def DIALOG_WANTPOINTSCLEARED(self) :
         return mb.askyesnocancel("Choix décisif", "Voulez vous effacer les points crées ?")
+    
+    def DIALOG_OTHONORMALSET(self) :
+        mb.showinfo("Information","Un nouvel origine du repère à été crée.")
 
 
     ### POINT HANDLER RELATED

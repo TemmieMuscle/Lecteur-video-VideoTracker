@@ -1,6 +1,5 @@
 import numpy as np
 from . import Point
-from .Video import Video
 import math
 
 class PointHandler:
@@ -46,11 +45,13 @@ class PointHandler:
         self.orthonormalPoint = Point(tabOrtho[0],tabOrtho[1])
 
     # function who return the self.tabPoint formatted with the orthonormal and the scale
-    def getTabFormattedPoint(self,event=None):
+    def getTabFormattedPoint(self, fps):
         formattedArray = [] # array of array who contain formatted point coordinates and frame
         for array in self.tabPoint: # adding each content of self.tabPoint in formattedArray, then format x and y with scale and orthonormal
-            formattedPoint=Point((array[0].getX()-self.orthonormalPoint.getX())*self.scale,(array[0].getY()-self.orthonormalPoint.getY())*self.scale)
-            formattedArray.append([formattedPoint,array[1]])
+            x = (array[0].getX()-self.orthonormalPoint.getX())*self.scale
+            y = (array[0].getY()-self.orthonormalPoint.getY())*self.scale
+            formattedPoint=Point(round(x, 3),round(y, 3))
+            formattedArray.append([formattedPoint,array[1]/fps]) # convert frames to seconds
         return formattedArray
 
     # rénitialise le tableau en le rendant vide
@@ -83,14 +84,14 @@ class PointHandler:
             return
 
         # Data for plotting
-        formattedArrayOfPoint = self.getTabFormattedPoint() # get the array of formated coordinate
+        formattedArrayOfPoint = self.getTabFormattedPoint(fps) # get the array of formated coordinate
         timeValues = []
         xValues = []
         yValues = []
         for i in range(len(formattedArrayOfPoint)) : # append every point/frame of formattedArrayOfPoint in xValues, yValues and timeValues
             xValues.append(formattedArrayOfPoint[i][0].getX())
             yValues.append(formattedArrayOfPoint[i][0].getY())
-            timeValues.append(formattedArrayOfPoint[i][1] / int(fps)) # time in seconds
+            timeValues.append(formattedArrayOfPoint[i][1])# time in seconds
         #print(xValues, yValues, timeValues)
 
         answer = self.view.DIALOG_SEPARATEDWINDOWS()
@@ -102,8 +103,8 @@ class PointHandler:
         else :
             self.view.showGraphs(xValues, yValues, timeValues)
 
-    def showTable(self):
-        formattedArrayOfPoint=self.getTabFormattedPoint()
+    def showTable(self, fps):
+        formattedArrayOfPoint=self.getTabFormattedPoint(fps)
         timeValues = ["Temps en secondes"] # Mise en forme du tableau
         xValues = ["Position horizontale en mètres"] 
         yValues = ["Position verticale en mètres"]
@@ -115,7 +116,7 @@ class PointHandler:
         for i in range(len(formattedArrayOfPoint)) : # append every point/frame of formattedArrayOfPoint in xValues, yValues and timeValues
             xValues.append(formattedArrayOfPoint[i][0].getX())
             yValues.append(formattedArrayOfPoint[i][0].getY())
-            timeValues.append(formattedArrayOfPoint[i][1]) # number of the frame
+            timeValues.append(formattedArrayOfPoint[i][1]) # time in seconds
         #print(xValues, yValues, timeValues)
 
         self.view.showTable(xValues, yValues, timeValues)

@@ -39,7 +39,7 @@ class FileRepo :
         else :
             return None
     
-    def save_data(self, tabPoints) : ### BEWARE -> x and y are in PIXELS AND timestamp is in FRAME
+    def save_data(self, tabPoints) : 
         if len(tabPoints) < 1 :
             self.view.DIALOG_NODATA()
             return

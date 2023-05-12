@@ -20,7 +20,7 @@ class Controller:
         self.view.viewMenu.entryconfig(0, command=self.printGraphe) 
 
         self.view.editMenu.entryconfig(0, command=self.switchMode)
-        self.view.editMenu.entryconfig(1, command=self.PointHandler.showTable)
+        self.view.editMenu.entryconfig(1, command=self.showTable)
         self.view.editMenu.entryconfig(2, command=self.PointHandler.cleanTab)
 
         # Video action buttons
@@ -74,8 +74,11 @@ class Controller:
     def printGraphe(self, event=None) :
         self.PointHandler.printGraph(self.video.fps)
 
+    def showTable(self) :
+        self.PointHandler.showTable(self.video.fps)
+
     def saveData(self, event=None) :
-        self.FileRepo.save_data(self.PointHandler.getTabFormattedPoint()) # faire fonction pointhandler qui renvoi un tab formatté
+        self.FileRepo.save_data(self.PointHandler.getTabFormattedPoint(self.video.fps)) 
 
     def skip_to_first_frame(self) : # handles keeping points or not
         if len(self.PointHandler.tabPoint) > 0 :
@@ -105,6 +108,7 @@ class Controller:
     def setOrthonormal(self,event):
         if self.video.cap != None:
             self.PointHandler.setOrthonormalPoint([event.x,self.video.height - event.y])
+            self.view.DIALOG_OTHONORMALSET()
 
     # function who call function destroy of tkinter on self.view to stop app
     def quit(self):
