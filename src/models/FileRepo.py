@@ -52,4 +52,4 @@ class FileRepo :
 
         data = self.transformDataToCsv(pointList, timeList) # converting data to csv
         self.save(data, False)
-        print("Data saved !")
+        #print("Data saved !")
