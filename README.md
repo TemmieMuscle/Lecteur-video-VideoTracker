@@ -5,11 +5,13 @@ Le logiciel dans l’archive est un projet dans le cadre de l’UE Développemen
 Les seuls élèves ayant participé à la construction, au développement et au maintien de ce logiciel ainsi que du GitLab correspondant sont Léonard BETTCHER et Nathan DOÏMO
 
 **Fonctionnalités spéciales :**
+
 - Mode édition : afin de commencer le pointage d’un objet, il faut d’abord activer le mode édition disponible dans Edit/Mode édition. Vous pourrez ainsi placer les points où vous voulez quand vous voulez. Ce mode est désactivé lorsque vous appuyez sur échap où lorsque vous arrivez à la dernière image (en avançant une par une).
 - Effacer les points : Il est possible d’effacer les points crées par l’utilisateur, pour ceci il suffit de sélectionner l’option « Effacer les points » dans le menu Edit. L’opération peut se faire lorsque l’utilisateur revient au début d’une vidéo selon son choix et est automatiquement faite lors du chargement d’une autre vidéo.
 
 
 **Fiche technique :**
+
 Le logiciel présent réponds à tous les critères obligatoires et facultatifs du cahier des charges.
 L’éxécutable est atteignable en src/Application.py
 Une vidéo de test est disponible en resources/videos/compteur.mp4
