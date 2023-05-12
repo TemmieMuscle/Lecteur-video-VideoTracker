@@ -45,18 +45,25 @@ class Controller:
             answer = self.view.DIALOG_EDITIONMODE()
             if answer == False:
                 return
+        else :
+            self.view.DIALOG_HASQUITEDITION()
         self.editionMode = not self.editionMode
 
     def switchEditionOff(self, event=None) : # turn edition mode using escape key
+        self.view.DIALOG_HASQUITEDITION()
         self.editionMode = False
 
     # fonction utilisé lors d'un click sur une frame de la vidéo => gére l'ajout des coordonnées du click et le numéro de la frame dans PointHandler
     def addPointInPointHandler(self,event):
-        if self.editionMode and self.video.cap != None:
+        if self.editionMode and self.video.cap != None and self.video.frame_index != self.video.frames_max:
             frame_index=self.video.frame_index # récupère l'index de l'image dont les positions ont été récupérées
             tabOfEvent=[event.x,self.video.height - event.y, frame_index] # créer un tab de la forme [posX,posY, time] //  inverting y so (0,0) is in bottom left corner
             self.PointHandler.addPoint(tabOfEvent) # appel d'une méthode de self.PointHandler pour ajouter tabOfEvent dans son tab of coordonnées
             self.video.forward_one_frame() # avance d'une frame dans la vidéo
+
+            if self.video.frame_index == self.video.frames_max : # Quitting edition mode when hitting last frame
+                self.switchEditionOff()
+
 
     def addScalePointInPointHandler(self,event):
             if self.video.cap != None:

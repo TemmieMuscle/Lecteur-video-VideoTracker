@@ -97,6 +97,10 @@ class View(tk.Frame):
     def DIALOG_EDITIONMODE(self) :
         return mb.askokcancel("Mode édition", "Vous pouvez maintenant ajouter des points sur la vidéo en cliquant dessus.\nAppuyez sur échap pour quitter ce mode.")
 
+    def DIALOG_HASQUITEDITION(self) :
+        mb.showinfo("Information","Vous avez quitté le mode édition.")
+
+
     ### POINT HANDLER RELATED
     def showSeparatedGraphs(self, xValues, yValues, timeValues) :
         fig, ax1 = plt.subplots()
