@@ -10,6 +10,7 @@ class PointHandler:
         self.tabPoint=[] #tableau de sous tableaux de la forme [[index,Point(posX,posY)] ...]
         self.tabScale = [] # tableau des points utilisés pour l'échelle
         self.scale = 1 / 100  # définit l'échelle des points, ici, 100 pixel = 1m -> a utiliser comme un scalaire : k pixels -> k*scale metres
+        self.orthonormalPoint = Point(0,0) # coordonnée du repere orthonomal
 
     # prend en argument un tableau de la forme [index,Point(posX,posY)] en tabOfEvent
     # Parcoure le tableau self.tabPoint pour voir si l'index donnée dans tabofEvent existe deja dans self.tabPointw
@@ -40,9 +41,22 @@ class PointHandler:
             self.setScale(self.tabScale[0], self.tabScale[1]) # calls setscale with
             self.tabScale = []
 
+    # function who set the orthonormal point to new coordinate in arguments
+    def setOrthonormalPoint(self,tabOrtho):
+        self.orthonormalPoint = Point(tabOrtho[0],tabOrtho[1])
+
+    # function who return the self.tabPoint formatted with the orthonormal and the scale
+    def getTabFormattedPoint(self,event=None):
+        formattedArray = [] # array of array who contain formatted point coordinates and frame
+        for array in self.tabPoint: # adding each content of self.tabPoint in formattedArray, then format x and y with scale and orthonormal
+            formattedPoint=Point((array[0].getX()-self.orthonormalPoint.getX())*self.scale,(array[0].getY()-self.orthonormalPoint.getY())*self.scale)
+            formattedArray.append([formattedPoint,array[1]])
+        return formattedArray
+
     # rénitialise le tableau en le rendant vide
     def cleanTab(self):
         self.tabPoint=[]
+        self.orthonormalPoint=Point(0,0)
         self.view.DIALOG_TABPOINTCLEARED()
 
     # define scale of pixels to meter
@@ -69,13 +83,14 @@ class PointHandler:
             return
 
         # Data for plotting
+        formattedArrayOfPoint = self.getTabFormattedPoint() # get the array of formated coordinate
         timeValues = []
         xValues = []
         yValues = []
-        for i in range(len(self.tabPoint)) :
-            xValues.append(self.tabPoint[i][0].getX()*self.scale) # x in meters ######### ROUND TO 3 WHEN FORMATTING
-            yValues.append(self.tabPoint[i][0].getY()*self.scale) # y in meters
-            timeValues.append(self.tabPoint[i][1] / int(fps)) # time in seconds
+        for i in range(len(formattedArrayOfPoint)) : # append every point/frame of formattedArrayOfPoint in xValues, yValues and timeValues
+            xValues.append(formattedArrayOfPoint[i][0].getX())
+            yValues.append(formattedArrayOfPoint[i][0].getY())
+            timeValues.append(formattedArrayOfPoint[i][1] / int(fps)) # time in seconds
         #print(xValues, yValues, timeValues)
 
         answer = self.view.DIALOG_SEPARATEDWINDOWS()
@@ -88,18 +103,19 @@ class PointHandler:
             self.view.showGraphs(xValues, yValues, timeValues)
 
     def showTable(self):
+        formattedArrayOfPoint=self.getTabFormattedPoint()
         timeValues = ["Temps en secondes"] # Mise en forme du tableau
         xValues = ["Position horizontale en mètres"] 
         yValues = ["Position verticale en mètres"]
 
-        if len(self.tabPoint) == 0:
+        if len(formattedArrayOfPoint) == 0:
             self.view.DIALOG_NODATA()
             return
 
-        for i in range(len(self.tabPoint)) :
-            xValues.append(self.tabPoint[i][0].getX()*self.scale) # x in meters
-            yValues.append(self.tabPoint[i][0].getY()*self.scale) # y in meter
-            timeValues.append(self.tabPoint[i][1] ) # time in frame
+        for i in range(len(formattedArrayOfPoint)) : # append every point/frame of formattedArrayOfPoint in xValues, yValues and timeValues
+            xValues.append(formattedArrayOfPoint[i][0].getX())
+            yValues.append(formattedArrayOfPoint[i][0].getY())
+            timeValues.append(formattedArrayOfPoint[i][1]) # number of the frame
         #print(xValues, yValues, timeValues)
 
         self.view.showTable(xValues, yValues, timeValues)

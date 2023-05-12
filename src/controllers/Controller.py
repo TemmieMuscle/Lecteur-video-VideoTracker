@@ -40,6 +40,7 @@ class Controller:
         # set click event
         self.view.cadreMilieu.bind('<Button-1>',self.addPointInPointHandler)
         self.view.cadreMilieu.bind('<Button-3>',self.addScalePointInPointHandler)
+        self.view.cadreMilieu.bind('<Button-2>',self.setOrthonormal)
 
     def switchMode(self, event=None) : # switch edition mode
         if self.editionMode == False:
@@ -65,7 +66,6 @@ class Controller:
             if self.video.frame_index == self.video.frames_max : # Quitting edition mode when hitting last frame
                 self.switchEditionOff()
 
-
     def addScalePointInPointHandler(self,event):
             if self.video.cap != None:
                 tabOfEvent=[event.x,self.video.height - event.y] # créer un tab de la forme [posX,posY, time] //  inverting y so (0,0) is in bottom left corner
@@ -75,7 +75,7 @@ class Controller:
         self.PointHandler.printGraph(self.video.fps)
 
     def saveData(self, event=None) :
-        self.FileRepo.save_data(self.PointHandler.tabPoint) # faire fonction pointhandler qui renvoi un tab formatté
+        self.FileRepo.save_data(self.PointHandler.getTabFormattedPoint()) # faire fonction pointhandler qui renvoi un tab formatté
 
     def skip_to_first_frame(self) : # handles keeping points or not
         if len(self.PointHandler.tabPoint) > 0 :
@@ -100,6 +100,11 @@ class Controller:
         if PATH != None : # verify that PATH is valid
             self.video.load_and_play_video(PATH)
             self.PointHandler.tabPoint = [] # clean the tab in PointHandler
+
+    # update the orthonormal point with click coordonate
+    def setOrthonormal(self,event):
+        if self.video.cap != None:
+            self.PointHandler.setOrthonormalPoint([event.x,self.video.height - event.y])
 
     # function who call function destroy of tkinter on self.view to stop app
     def quit(self):
