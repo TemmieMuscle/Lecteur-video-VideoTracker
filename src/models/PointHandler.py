@@ -7,7 +7,7 @@ class PointHandler:
     def __init__(self, view):
         self.view = view
 
-        self.tabPoint=[] #tableau de sous tableaux de la forme [[posX,posY, index],...,[posX,posY, index]]
+        self.tabPoint=[] #tableau de sous tableaux de la forme [[index,Point(posX,posY)] ...]
         self.tabScale = [] # tableau des points utilisés pour l'échelle
         self.scale = 1 / 100  # définit l'échelle des points, ici, 100 pixel = 1m -> a utiliser comme un scalaire : k pixels -> k*scale metres
 
@@ -19,15 +19,16 @@ class PointHandler:
         index = tabOfEvent[2]
         x = round(tabOfEvent[0], 3)
         y = round(tabOfEvent[1], 3)
-        for i in range(len(self.tabPoint)):
+        for i in range(len(self.tabPoint)): # if point already in tab replace it
             if self.tabPoint[i][1]==index:
-                self.tabPoint[i][1]=Point(x,y)
+                self.tabPoint[i][0]=Point(x,y)
                 #print(self.tabPoint[index-1][0].getY())
                 return
             
         self.tabPoint.append([Point(x,y), index])
         #print(self.tabPoint[index-1][0].getY())
-        self.tabPoint=sorted(self.tabPoint, key=lambda numero: numero[1]) # trie self.tabPoint en fonction de l'indice 0 des tableaux qui le compose (soit par leur index)
+        #print(self.tabPoint)
+        self.tabPoint=sorted(self.tabPoint, key=lambda n: n[1]) # trie self.tabPoint en fonction de l'indice 1 des tableaux qui le compose (soit par leur index)
 
     # same as above but puts the points in tabScale and checks if tab is full
     def addScalePoint(self, tabOfEvent) :
