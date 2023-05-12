@@ -22,6 +22,7 @@ class Controller:
         self.view.editMenu.entryconfig(0, command=self.switchMode)
         self.view.editMenu.entryconfig(1, command=self.showTable)
         self.view.editMenu.entryconfig(2, command=self.PointHandler.cleanTab)
+        self.view.editMenu.entryconfig(4, command=self.view.DIALOG_HELP)
 
         # Video action buttons
         self.view.play_btn.config(command=self.video.pause_video)
@@ -42,7 +43,8 @@ class Controller:
         self.view.cadreMilieu.bind('<Button-3>',self.addScalePointInPointHandler)
         self.view.cadreMilieu.bind('<Button-2>',self.setOrthonormal)
 
-    def switchMode(self, event=None) : # switch edition mode
+    # switch edition mode
+    def switchMode(self, event=None) : 
         if self.editionMode == False:
             answer = self.view.DIALOG_EDITIONMODE()
             if answer == False:
@@ -51,7 +53,8 @@ class Controller:
             self.view.DIALOG_HASQUITEDITION()
         self.editionMode = not self.editionMode
 
-    def switchEditionOff(self, event=None) : # turn edition mode using escape key
+    # turn edition mode using escape key
+    def switchEditionOff(self, event=None) : 
         self.view.DIALOG_HASQUITEDITION()
         self.editionMode = False
 
@@ -71,15 +74,19 @@ class Controller:
                 tabOfEvent=[event.x,self.video.height - event.y] # créer un tab de la forme [posX,posY, time] //  inverting y so (0,0) is in bottom left corner
                 self.PointHandler.addScalePoint(tabOfEvent) # appel d'une méthode de self.PointHandler pour ajouter tabOfEvent dans son tab of coordonnées
 
+    # calls printgraph from pointhandler
     def printGraphe(self, event=None) :
         self.PointHandler.printGraph(self.video.fps)
 
+    # calls showtable from pointhandler
     def showTable(self) :
         self.PointHandler.showTable(self.video.fps)
 
+    # calls savedata from filerepo
     def saveData(self, event=None) :
         self.FileRepo.save_data(self.PointHandler.getTabFormattedPoint(self.video.fps)) 
 
+    # calls printgraph from pointhandler
     def skip_to_first_frame(self) : # handles keeping points or not
         if len(self.PointHandler.tabPoint) > 0 :
             answer = self.view.DIALOG_WANTPOINTSCLEARED()

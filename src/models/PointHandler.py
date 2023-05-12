@@ -69,7 +69,7 @@ class PointHandler:
 
         realLength = 0
         while realLength <= 0 :
-            answer = self.view.DIALOG_SETSCALE()
+            answer = self.view.DIALOG_SETSCALE() # loop while user anser not valid
             if answer==None:
                 return
             else:
@@ -103,6 +103,7 @@ class PointHandler:
         else :
             self.view.showGraphs(xValues, yValues, timeValues)
 
+    # gets formatted data of points then calls view to show a table with said data
     def showTable(self, fps):
         formattedArrayOfPoint=self.getTabFormattedPoint(fps)
         timeValues = ["Temps en secondes"] # Mise en forme du tableau

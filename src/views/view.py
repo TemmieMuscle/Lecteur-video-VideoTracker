@@ -15,6 +15,7 @@ class View(tk.Frame):
         parent.minsize(1100,400)
         self.parent=parent
 
+        # Style options
         leStyle = ttk.Style(parent)
         leStyle.theme_use("clam")
         leStyle.configure("TButton",font=('',12))
@@ -40,6 +41,8 @@ class View(tk.Frame):
         self.editMenu.add_command(label="Mode édition",font=laFonte)
         self.editMenu.add_command(label="Tableau de points",font=laFonte)
         self.editMenu.add_command(label="Effacer les points",font=laFonte)
+        self.editMenu.add_separator()
+        self.editMenu.add_command(label="Aide",font=laFonte)
         menuBarre.add_cascade(label="Edit",menu=self.editMenu,font=laFonte)
 
         self.parent.config(menu=menuBarre)
@@ -79,7 +82,7 @@ class View(tk.Frame):
         cadreBas.pack(side='bottom',fill="x")
 
 
-    ### ALL DIALOGS WINDOWS FOR MODELS AND CONTROLLER:
+    ### ALL DIALOGS WINDOWS FOR MODELS AND CONTROLLER
     # FILEREPO
     def DIALOG_NODATA(self) :
         mb.showerror("Erreur", "Aucune donnée disponible. Avez vous au moins crée un point ?")
@@ -110,7 +113,14 @@ class View(tk.Frame):
     def DIALOG_OTHONORMALSET(self) :
         mb.showinfo("Information","Un nouvel origine du repère à été crée.")
 
-
+    def DIALOG_HELP(self) :
+        mb.showinfo("Aide","""Commandes spéciales :
+- Effectuer un clic gauche pour ajouter des points (uniquement en mode édition)
+- Effectuer deux clics droit pour pouvoir définir une échelle
+- Effectuer un clic molette pour définir l'origine de l'axe
+- Ctrl+O pour charger une vidéo
+- Ctrl+Q pour lire une vidéo
+        """)
     ### POINT HANDLER RELATED
     def showSeparatedGraphs(self, xValues, yValues, timeValues) :
         fig, ax1 = plt.subplots()
