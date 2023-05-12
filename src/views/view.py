@@ -39,6 +39,7 @@ class View(tk.Frame):
         self.editMenu=tk.Menu(menuBarre, tearoff=0)
         self.editMenu.add_command(label="Mode édition",font=laFonte)
         self.editMenu.add_command(label="Tableau de points",font=laFonte)
+        self.editMenu.add_command(label="Effacer les points",font=laFonte)
         menuBarre.add_cascade(label="Edit",menu=self.editMenu,font=laFonte)
 
         self.parent.config(menu=menuBarre)
@@ -93,12 +94,18 @@ class View(tk.Frame):
     def DIALOG_SEPARATEDWINDOWS(self) :
         return mb.askyesnocancel("Choix décisif", "Voulez-vous les graphiques dans des fenêtres séparées ?")
     
+    def DIALOG_TABPOINTCLEARED(self) :
+        mb.showinfo("Information","Les points ont été éffacés")
+    
     # CONTROLLER
     def DIALOG_EDITIONMODE(self) :
         return mb.askokcancel("Mode édition", "Vous pouvez maintenant ajouter des points sur la vidéo en cliquant dessus.\nAppuyez sur échap pour quitter ce mode.")
 
     def DIALOG_HASQUITEDITION(self) :
         mb.showinfo("Information","Vous avez quitté le mode édition.")
+ 
+    def DIALOG_WANTPOINTSCLEARED(self) :
+        return mb.askyesnocancel("Choix décisif", "Voulez vous effacer les points crées ?")
 
 
     ### POINT HANDLER RELATED

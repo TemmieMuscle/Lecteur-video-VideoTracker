@@ -21,10 +21,11 @@ class Controller:
 
         self.view.editMenu.entryconfig(0, command=self.switchMode)
         self.view.editMenu.entryconfig(1, command=self.PointHandler.showTable)
+        self.view.editMenu.entryconfig(2, command=self.PointHandler.cleanTab)
 
         # Video action buttons
         self.view.play_btn.config(command=self.video.pause_video)
-        self.view.skipBackward_btn.config(command=self.video.skip_to_first_frame)
+        self.view.skipBackward_btn.config(command=self.skip_to_first_frame)
         self.view.skipForward_btn.config(command=self.video.skip_to_last_frame)
         self.view.back_btn.config(command=self.video.backward_one_frame)
         self.view.next_btn.config(command=self.video.forward_one_frame)
@@ -76,19 +77,29 @@ class Controller:
     def saveData(self, event=None) :
         self.FileRepo.save_data(self.PointHandler.tabPoint) # faire fonction pointhandler qui renvoi un tab formatté
 
+    def skip_to_first_frame(self) : # handles keeping points or not
+        if len(self.PointHandler.tabPoint) > 0 :
+            answer = self.view.DIALOG_WANTPOINTSCLEARED()
+            if answer == True :
+                self.PointHandler.cleanTab()
+            elif answer == None :
+                return
+        self.video.skip_to_first_frame()
+
+
     # function who get a path of a video in PATH, and then call the function load_video of self.video. Have an "event" argument for handling .bind
     def loadVideo(self,event=None):
         PATH=self.FileRepo.getFile() # get path with class FileRepo
         if PATH != None : # verify that PATH is valid
             self.video.load_video(PATH)
-            self.PointHandler.cleanTab() # clean the tab in PointHandler
+            self.PointHandler.tabPoint = [] # clean the tab in PointHandler
 
     # function who get a path of a video in PATH, and then call the function load_and_play_video of self.video. Have an "event" argument for handling .bind
     def playAndLoadVideo(self,event=None):
         PATH=self.FileRepo.getFile() # get path with class FileRepo
         if PATH != None : # verify that PATH is valid
             self.video.load_and_play_video(PATH)
-            self.PointHandler.cleanTab() # clean the tab in PointHandler
+            self.PointHandler.tabPoint = [] # clean the tab in PointHandler
 
     # function who call function destroy of tkinter on self.view to stop app
     def quit(self):

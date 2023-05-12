@@ -42,6 +42,7 @@ class PointHandler:
     # rénitialise le tableau en le rendant vide
     def cleanTab(self):
         self.tabPoint=[]
+        self.view.DIALOG_TABPOINTCLEARED()
 
     # define scale of pixels to meter
     def setScale(self, point1, point2) :
