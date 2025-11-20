@@ -1,8 +1,11 @@
 **Projet VideoTracker**
 
-Le logiciel dans l’archive est un projet dans le cadre de l’UE Développement Logiciel en L1 Informatique durant l’année 2022/2023. Il a pour objectif de proposer un système de pointage vidéo permettant de suivre un objet durant son déplacement pour, par exemple, réaliser des mesures physiques.
+(importé depuis le GitLab universitaire)  
 
-Les seuls élèves ayant participé à la construction, au développement et au maintien de ce logiciel ainsi que du GitLab correspondant sont Léonard BETTCHER et Nathan DOÏMO.
+Ce logiciel est un projet fait dans le cadre de l’UE "Développement Logiciel" en L1 Informatique durant l’année 2022/2023.   
+Il a pour objectif de proposer un système de pointage vidéo permettant de suivre un objet durant son déplacement pour, par exemple, réaliser des mesures physiques.  
+Ce projet Python utilise Tkinter, Pillow, Matplotlib, NumPy, OpenCV pour GUI et traitement vidéo, avec tests unitaires via unittest et coverage.  
+Les étudiants ayant participé à la construction, au développement et au maintien de ce logiciel ainsi que du GitLab correspondant sont Léonard BETTCHER et Nathan DOÏMO.
 
 **Fiche technique :**
 Le logiciel présent réponds à tous les critères obligatoires et facultatifs du cahier des charges.
